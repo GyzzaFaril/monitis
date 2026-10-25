@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MONITIS - Monitoring & Kontrol</title>
+    <title>MONITIS - Smart Infusion System</title>
     <!-- Font Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS -->
@@ -45,45 +45,60 @@
             background: #e2e8f0;
             border-radius: 4px;
         }
+        /* Transisi untuk sidebar mobile */
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Mencegah highlight biru saat tap di mobile */
+        * { -webkit-tap-highlight-color: transparent; }
     </style>
 </head>
 <body class="bg-background text-slate-800 font-sans flex h-screen overflow-hidden">
 
-    <!-- Sidebar (Desktop) -->
-    <aside class="w-64 bg-[#0F172A] text-slate-300 flex-shrink-0 hidden md:flex flex-col h-full z-20">
-        <div class="h-16 flex items-center px-6 border-b border-slate-800 shrink-0">
-            <i data-lucide="activity" class="text-primary w-6 h-6 mr-3"></i>
-            <div>
-                <h1 class="text-white font-bold tracking-wide text-lg leading-tight">MONITIS</h1>
-                <p class="text-[10px] text-slate-400 font-medium tracking-wider">SMART INFUSION SYSTEM</p>
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-slate-900/50 z-20 hidden md:hidden transition-opacity" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-[#0F172A] text-slate-300 flex-shrink-0 flex flex-col h-full z-30 fixed md:relative transform -translate-x-full md:translate-x-0 sidebar-transition">
+        <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800 shrink-0">
+            <div class="flex items-center">
+                <i data-lucide="activity" class="text-primary w-6 h-6 mr-3"></i>
+                <div>
+                    <h1 class="text-white font-bold tracking-wide text-lg leading-tight">MONITIS</h1>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-wider">SMART INFUSION</p>
+                </div>
             </div>
+            <button class="md:hidden text-slate-400 hover:text-white" onclick="toggleSidebar()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
         </div>
         <div class="flex-1 overflow-y-auto py-6 px-4 space-y-8">
             <div>
                 <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-2">Workspace</p>
-                <nav class="space-y-1">
-                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-                        <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 opacity-70"></i> Dashboard
+                <nav class="space-y-1" id="nav-workspace">
+                    <a href="#" onclick="showPage('dashboard', 'Dashboard')" data-page="dashboard" class="menu-item flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 icon-menu opacity-70"></i> Dashboard
                     </a>
-                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg bg-primary/10 text-primary font-medium">
-                        <i data-lucide="sliders-horizontal" class="w-4 h-4 mr-3"></i> Monitoring & Kontrol
+                    <!-- Default Active -->
+                    <a href="#" onclick="showPage('monitoring', 'Monitoring & Kontrol')" data-page="monitoring" class="menu-item active flex items-center px-2 py-2 text-sm rounded-lg bg-primary/10 text-primary font-medium transition-colors">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4 mr-3 icon-menu"></i> Monitoring & Kontrol
                     </a>
-                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-                        <i data-lucide="history" class="w-4 h-4 mr-3 opacity-70"></i> Riwayat Data
+                    <a href="#" onclick="showPage('history', 'Riwayat Data')" data-page="history" class="menu-item flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="history" class="w-4 h-4 mr-3 icon-menu opacity-70"></i> Riwayat Data
                     </a>
-                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-                        <i data-lucide="alert-triangle" class="w-4 h-4 mr-3 opacity-70"></i> Peringatan
+                    <a href="#" onclick="showPage('alerts', 'Peringatan')" data-page="alerts" class="menu-item flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 mr-3 icon-menu opacity-70"></i> Peringatan
                     </a>
                 </nav>
             </div>
             <div>
                 <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-2">System</p>
-                <nav class="space-y-1">
-                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-                        <i data-lucide="settings" class="w-4 h-4 mr-3 opacity-70"></i> Pengaturan
+                <nav class="space-y-1" id="nav-system">
+                    <a href="#" onclick="showPage('settings', 'Pengaturan')" data-page="settings" class="menu-item flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="settings" class="w-4 h-4 mr-3 icon-menu opacity-70"></i> Pengaturan
                     </a>
-                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-                        <i data-lucide="cpu" class="w-4 h-4 mr-3 opacity-70"></i> Manajemen Perangkat
+                    <a href="#" onclick="showPage('devices', 'Manajemen Perangkat')" data-page="devices" class="menu-item flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="cpu" class="w-4 h-4 mr-3 icon-menu opacity-70"></i> Manajemen Perangkat
                     </a>
                 </nav>
             </div>
@@ -91,26 +106,40 @@
     </aside>
 
     <!-- Main Content Wrapper -->
-    <div class="flex-1 flex flex-col min-w-0 h-full">
+    <div class="flex-1 flex flex-col min-w-0 h-full w-full">
         <!-- Topbar -->
-        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 shrink-0 z-10 shadow-sm">
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 shrink-0 z-10 shadow-sm relative">
             <div class="flex items-center">
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden mr-4 text-slate-500 hover:text-slate-800">
+                <button class="md:hidden mr-4 text-slate-500 hover:text-slate-800" onclick="toggleSidebar()">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
                 <div class="hidden sm:flex text-sm text-slate-500 items-center">
                     <span>MONITIS</span>
                     <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
-                    <span class="font-medium text-slate-800">Monitoring & Kontrol</span>
+                    <span class="font-medium text-slate-800" id="breadcrumb-text">Monitoring & Kontrol</span>
                 </div>
+                <!-- Mobile Page Title -->
+                <span class="sm:hidden font-semibold text-slate-800 text-sm" id="mobile-page-title">Monitoring & Kontrol</span>
             </div>
             <div class="flex items-center space-x-4 sm:space-x-6">
-                <!-- Device Selector -->
-                <div class="hidden sm:flex items-center bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-md text-sm cursor-pointer hover:bg-slate-100 transition-colors">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
-                    <span class="font-medium text-slate-700">IS-001 &middot; Infus Ruang Demo</span>
-                    <i data-lucide="chevron-down" class="w-4 h-4 ml-2 text-slate-400"></i>
+                <!-- Device Selector Dropdown -->
+                <div class="relative">
+                    <div class="hidden sm:flex items-center bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-md text-sm cursor-pointer hover:bg-slate-100 transition-colors" onclick="toggleDeviceMenu()">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
+                        <span class="font-medium text-slate-700" id="topbar-device-name">IS-001 &middot; Infus Ruang Demo</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 ml-2 text-slate-400"></i>
+                    </div>
+                    <!-- Dropdown Content -->
+                    <div id="device-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-slate-200 z-50">
+                        <div class="p-2 border-b border-slate-100">
+                            <p class="text-xs font-semibold text-slate-400 uppercase">Pilih Perangkat</p>
+                        </div>
+                        <ul class="py-1">
+                            <li><button onclick="changeDevice(0)" class="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700"><span class="w-2 h-2 inline-block rounded-full bg-emerald-500 mr-2"></span>IS-001 (Ruang Demo)</button></li>
+                            <li><button onclick="changeDevice(1)" class="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700"><span class="w-2 h-2 inline-block rounded-full bg-emerald-500 mr-2"></span>IS-002 (IGD Bed 1)</button></li>
+                            <li><button onclick="changeDevice(2)" class="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 text-slate-700"><span class="w-2 h-2 inline-block rounded-full bg-red-500 mr-2"></span>IS-003 (ICU Bed 4) - Offline</button></li>
+                        </ul>
+                    </div>
                 </div>
                 <!-- Icons -->
                 <button class="relative text-slate-400 hover:text-slate-600">
@@ -123,227 +152,407 @@
             </div>
         </header>
 
-        <!-- Scrollable Page Content -->
-        <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 relative">
+        <!-- Scrollable Container -->
+        <main class="flex-1 overflow-y-auto relative bg-background">
             
-            <!-- Page Header -->
-            <div class="mb-8">
-                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                    <div>
-                        <span class="text-xs font-bold text-primary tracking-wider uppercase mb-1 block">Kontrol Laju Tetesan</span>
-                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Monitoring & Kontrol</h2>
-                        <p class="text-sm text-slate-500 mt-2 max-w-2xl leading-relaxed">
-                            Pantau laju tetesan aktual dan atur target TPM (Tetes Per Menit) untuk mengendalikan mekanisme tetesan infus secara otomatis.
-                        </p>
+            <!-- ===================== PAGE: DASHBOARD ===================== -->
+            <div id="page-dashboard" class="page-section hidden p-4 sm:p-6 lg:p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Dashboard Utama</h2>
+                    <p class="text-sm text-slate-500 mt-1">Ringkasan kondisi seluruh perangkat smart infusion Anda.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mr-4">
+                            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-slate-800">12</p>
+                            <p class="text-sm text-slate-500">Perangkat Aktif & Normal</p>
+                        </div>
                     </div>
-                    <div class="inline-flex items-center px-3 py-1.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold">
-                        <i data-lucide="test-tube" class="w-3.5 h-3.5 mr-1.5"></i> MODE DEMO AKTIF
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-4">
+                            <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-slate-800">1</p>
+                            <p class="text-sm text-slate-500">Perlu Perhatian / Offline</p>
+                        </div>
                     </div>
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-4">
+                            <i data-lucide="cpu" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-slate-800">13</p>
+                            <p class="text-sm text-slate-500">Total Perangkat Terdaftar</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dummy Info Container -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center text-slate-500 py-16">
+                    <i data-lucide="bar-chart-3" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+                    <p class="font-medium">Data analitik tambahan akan muncul di sini.</p>
                 </div>
             </div>
 
-            <!-- Summary Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
-                <!-- Card 1 -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <p class="text-sm font-medium text-slate-500">Target TPM</p>
-                        <div class="p-2 bg-blue-50 text-primary rounded-lg">
-                            <i data-lucide="target" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-baseline gap-1">
-                            <h3 class="text-3xl font-bold text-slate-800" id="val-target">24</h3>
-                            <span class="text-sm font-medium text-slate-500">TPM</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mt-1">Ditentukan operator</p>
-                    </div>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <p class="text-sm font-medium text-slate-500">Laju Aktual</p>
-                        <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
-                            <i data-lucide="droplets" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-baseline gap-1">
-                            <h3 class="text-3xl font-bold text-slate-800" id="val-aktual">0</h3>
-                            <span class="text-sm font-medium text-slate-500">TPM</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mt-1">Pembacaan sensor optik</p>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <p class="text-sm font-medium text-slate-500">Selisih TPM</p>
-                        <div class="p-2 bg-amber-50 text-amber-600 rounded-lg">
-                            <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-baseline gap-1">
-                            <h3 class="text-3xl font-bold text-slate-800" id="val-selisih">0</h3>
-                            <span class="text-sm font-medium text-slate-500">TPM</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mt-1">Target vs Aktual</p>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <p class="text-sm font-medium text-slate-500">Status Servo</p>
-                        <div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
-                            <i data-lucide="rotate-cw" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-baseline gap-1">
-                            <h3 class="text-3xl font-bold text-slate-800" id="val-servo">0</h3>
-                            <span class="text-sm font-medium text-slate-500">&deg; (Derajat)</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mt-1">Output aktuator</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Control & Status Panels -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                
-                <!-- Panel Kontrol (2 Columns span on large) -->
-                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col">
-                    <h3 class="text-lg font-semibold text-slate-800 mb-6 flex items-center">
-                        <i data-lucide="sliders-horizontal" class="w-5 h-5 mr-2 text-primary"></i>
-                        Kontrol Laju Tetesan
-                    </h3>
-                    
-                    <div class="flex-1 flex flex-col justify-center items-center py-4">
-                        <p class="text-sm text-slate-500 font-medium mb-2">Target Tetesan Baru</p>
-                        <div class="flex items-baseline gap-2 mb-8">
-                            <span class="text-6xl font-bold text-primary tracking-tight" id="slider-val-display">24</span>
-                            <span class="text-lg font-semibold text-slate-400">TPM</span>
-                        </div>
-                        
-                        <div class="w-full max-w-md px-4 mb-4">
-                            <input type="range" id="tpm-slider" min="8" max="60" value="24" oninput="updateSliderValue(this.value)">
-                            <div class="flex justify-between text-xs font-medium text-slate-400 mt-3">
-                                <span>8 TPM</span>
-                                <span>60 TPM</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-8 flex flex-col items-center gap-3">
-                            <button onclick="terapkanTarget()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-lg shadow-sm transition-colors focus:ring-4 focus:ring-primary/20 flex items-center">
-                                <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
-                                Terapkan Target
-                            </button>
-                            <p id="notif-target" class="text-xs text-emerald-600 font-medium opacity-0 transition-opacity duration-300">
-                                Target demo berhasil diperbarui.
+            <!-- ===================== PAGE: MONITORING & KONTROL (DEFAULT) ===================== -->
+            <div id="page-monitoring" class="page-section p-4 sm:p-6 lg:p-8">
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-bold text-primary tracking-wider uppercase mb-1 block">Kontrol Laju Tetesan</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Monitoring & Kontrol</h2>
+                            <p class="text-sm text-slate-500 mt-2 max-w-2xl leading-relaxed">
+                                Pantau laju tetesan aktual dan atur target TPM (Tetes Per Menit) untuk mengendalikan mekanisme tetesan infus secara otomatis.
                             </p>
                         </div>
+                        <div class="inline-flex items-center px-3 py-1.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold">
+                            <i data-lucide="test-tube" class="w-3.5 h-3.5 mr-1.5"></i> MODE DEMO AKTIF
+                        </div>
                     </div>
                 </div>
 
-                <!-- Panel Status Kontrol (1 Column span on large) -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-slate-800 mb-6 flex items-center">
-                        <i data-lucide="cpu" class="w-5 h-5 mr-2 text-slate-500"></i>
-                        Status Kontrol Otomatis
-                    </h3>
+                <!-- Summary Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="text-sm font-medium text-slate-500">Target TPM</p>
+                            <div class="p-2 bg-blue-50 text-primary rounded-lg">
+                                <i data-lucide="target" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <h3 class="text-3xl font-bold text-slate-800" id="val-target">24</h3>
+                                <span class="text-sm font-medium text-slate-500">TPM</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Ditentukan operator</p>
+                        </div>
+                    </div>
                     
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                            <span class="text-sm text-slate-500">Target TPM</span>
-                            <span class="text-sm font-semibold text-slate-800" id="status-target">24 TPM</span>
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="text-sm font-medium text-slate-500">Laju Aktual</p>
+                            <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
+                                <i data-lucide="droplets" class="w-5 h-5"></i>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                            <span class="text-sm text-slate-500">Laju Aktual</span>
-                            <span class="text-sm font-semibold text-slate-800" id="status-aktual">0 TPM</span>
-                        </div>
-                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                            <span class="text-sm text-slate-500">Selisih</span>
-                            <span class="text-sm font-semibold text-slate-800" id="status-selisih">0 TPM</span>
-                        </div>
-                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                            <span class="text-sm text-slate-500">Posisi Servo</span>
-                            <span class="text-sm font-semibold text-slate-800" id="status-servo">0&deg;</span>
-                        </div>
-                        <div class="flex justify-between items-center py-2">
-                            <span class="text-sm text-slate-500">Status</span>
-                            <span id="status-badge" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-slate-100 text-slate-600">
-                                Menunggu Data
-                            </span>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <h3 class="text-3xl font-bold text-slate-800" id="val-aktual">0</h3>
+                                <span class="text-sm font-medium text-slate-500">TPM</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Pembacaan sensor optik</p>
                         </div>
                     </div>
 
-                    <!-- Visual Indicator Bar -->
-                    <div class="mt-6">
-                        <div class="flex justify-between text-xs text-slate-400 mb-1">
-                            <span>Lambat</span>
-                            <span>Sesuai</span>
-                            <span>Cepat</span>
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="text-sm font-medium text-slate-500">Selisih TPM</p>
+                            <div class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                                <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
+                            </div>
                         </div>
-                        <div class="h-2 w-full bg-slate-100 rounded-full relative overflow-hidden">
-                            <!-- Indicator marker -->
-                            <div id="visual-marker" class="absolute top-0 bottom-0 w-4 bg-primary rounded-full transition-all duration-500 ease-out" style="left: 50%; transform: translateX(-50%);"></div>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <h3 class="text-3xl font-bold text-slate-800" id="val-selisih">0</h3>
+                                <span class="text-sm font-medium text-slate-500">TPM</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Target vs Aktual</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="text-sm font-medium text-slate-500">Status Servo</p>
+                            <div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
+                                <i data-lucide="rotate-cw" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <h3 class="text-3xl font-bold text-slate-800" id="val-servo">0</h3>
+                                <span class="text-sm font-medium text-slate-500">&deg; (Derajat)</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Output aktuator</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control & Status Panels -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Panel Kontrol -->
+                    <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-6 flex items-center">
+                            <i data-lucide="sliders-horizontal" class="w-5 h-5 mr-2 text-primary"></i>
+                            Kontrol Laju Tetesan
+                        </h3>
+                        
+                        <div class="flex-1 flex flex-col justify-center items-center py-4">
+                            <p class="text-sm text-slate-500 font-medium mb-2">Target Tetesan Baru</p>
+                            <div class="flex items-baseline gap-2 mb-8">
+                                <span class="text-6xl font-bold text-primary tracking-tight" id="slider-val-display">24</span>
+                                <span class="text-lg font-semibold text-slate-400">TPM</span>
+                            </div>
+                            
+                            <div class="w-full max-w-md px-4 mb-4">
+                                <input type="range" id="tpm-slider" min="8" max="60" value="24" oninput="updateSliderValue(this.value)">
+                                <div class="flex justify-between text-xs font-medium text-slate-400 mt-3">
+                                    <span>8 TPM</span>
+                                    <span>60 TPM</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 flex flex-col items-center gap-3">
+                                <button onclick="terapkanTarget()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-lg shadow-sm transition-colors focus:ring-4 focus:ring-primary/20 flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
+                                    Terapkan Target
+                                </button>
+                                <p id="notif-target" class="text-xs text-emerald-600 font-medium opacity-0 transition-opacity duration-300">
+                                    Target demo berhasil diperbarui.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Status -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-6 flex items-center">
+                            <i data-lucide="cpu" class="w-5 h-5 mr-2 text-slate-500"></i>
+                            Status Kontrol Otomatis
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-500">Target TPM</span>
+                                <span class="text-sm font-semibold text-slate-800" id="status-target">24 TPM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-500">Laju Aktual</span>
+                                <span class="text-sm font-semibold text-slate-800" id="status-aktual">0 TPM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-500">Selisih</span>
+                                <span class="text-sm font-semibold text-slate-800" id="status-selisih">0 TPM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-500">Posisi Servo</span>
+                                <span class="text-sm font-semibold text-slate-800" id="status-servo">0&deg;</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-sm text-slate-500">Status</span>
+                                <span id="status-badge" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-slate-100 text-slate-600">
+                                    Menunggu Data
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Visual Indicator Bar -->
+                        <div class="mt-6">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1">
+                                <span>Lambat</span>
+                                <span>Sesuai</span>
+                                <span>Cepat</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 rounded-full relative overflow-hidden">
+                                <div id="visual-marker" class="absolute top-0 bottom-0 w-4 bg-primary rounded-full transition-all duration-500 ease-out" style="left: 50%; transform: translateX(-50%);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart & Device Info -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Grafik (2 Cols) -->
+                    <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                            <i data-lucide="line-chart" class="w-5 h-5 mr-2 text-primary"></i>
+                            Grafik Laju Tetesan (Demo)
+                        </h3>
+                        <div class="w-full h-[300px] relative">
+                            <canvas id="monitoringChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Info Perangkat (1 Col) -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                            <i data-lucide="info" class="w-5 h-5 mr-2 text-slate-500"></i>
+                            Informasi Perangkat
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Nama Perangkat</p>
+                                <p class="text-sm font-medium text-slate-800" id="info-device-name">IS-001 · Infus Ruang Demo</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">ID Perangkat</p>
+                                <p class="text-sm font-mono text-slate-800 bg-slate-50 p-1.5 rounded border border-slate-100 inline-block" id="info-device-id">ESP32-MONITIS-A4</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Sensor</p>
+                                    <p class="text-sm font-medium text-slate-800">Optik (Inframerah)</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Aktuator</p>
+                                    <p class="text-sm font-medium text-slate-800">Servo Motor SG90</p>
+                                </div>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-500">Status Koneksi</span>
+                                    <span class="flex items-center text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full" id="info-conn-status">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+                                        Terhubung (Demo)
+                                    </span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-2 text-right">Pembaruan: Real-time</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Chart & Device Info -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Grafik (2 Cols) -->
-                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
-                        <i data-lucide="line-chart" class="w-5 h-5 mr-2 text-primary"></i>
-                        Grafik Laju Tetesan (Demo)
-                    </h3>
-                    <div class="w-full h-[300px] relative">
-                        <canvas id="monitoringChart"></canvas>
+            <!-- ===================== PAGE: RIWAYAT DATA ===================== -->
+            <div id="page-history" class="page-section hidden p-4 sm:p-6 lg:p-8">
+                <div class="mb-6 flex justify-between items-end">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Riwayat Data</h2>
+                        <p class="text-sm text-slate-500 mt-1">Log rekam jejak tetesan cairan infus pada perangkat ini.</p>
+                    </div>
+                    <button class="bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-slate-50">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-2"></i> Ekspor CSV
+                    </button>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider border-b border-slate-200">
+                                <th class="p-4 font-semibold">Waktu</th>
+                                <th class="p-4 font-semibold">Target (TPM)</th>
+                                <th class="p-4 font-semibold">Aktual (TPM)</th>
+                                <th class="p-4 font-semibold">Selisih</th>
+                                <th class="p-4 font-semibold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm divide-y divide-slate-100">
+                            <tr><td class="p-4">10:45:00</td><td class="p-4">24</td><td class="p-4 font-medium text-emerald-600">24</td><td class="p-4">0</td><td class="p-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs">Stabil</span></td></tr>
+                            <tr><td class="p-4">10:40:00</td><td class="p-4">24</td><td class="p-4">25</td><td class="p-4 text-amber-600">+1</td><td class="p-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs">Menyesuaikan</span></td></tr>
+                            <tr><td class="p-4">10:35:00</td><td class="p-4">24</td><td class="p-4">23</td><td class="p-4 text-amber-600">-1</td><td class="p-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs">Menyesuaikan</span></td></tr>
+                            <tr><td class="p-4">10:30:00</td><td class="p-4">20</td><td class="p-4 font-medium text-emerald-600">20</td><td class="p-4">0</td><td class="p-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs">Stabil</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===================== PAGE: PERINGATAN ===================== -->
+            <div id="page-alerts" class="page-section hidden p-4 sm:p-6 lg:p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Peringatan Sistem</h2>
+                    <p class="text-sm text-slate-500 mt-1">Daftar anomali dan alarm perangkat.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl border border-l-4 border-l-red-500 border-slate-200 p-5 shadow-sm flex items-start">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-red-500 mt-0.5 mr-3 shrink-0"></i>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Aliran Terhenti (Occlusion)</h4>
+                            <p class="text-sm text-slate-500 mt-1">Perangkat IS-003 tidak mendeteksi tetesan selama 1 menit meskipun target ditetapkan 20 TPM.</p>
+                            <p class="text-xs text-slate-400 mt-2">Hari ini, 09:12 AM</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl border border-l-4 border-l-amber-500 border-slate-200 p-5 shadow-sm flex items-start">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500 mt-0.5 mr-3 shrink-0"></i>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Cairan Hampir Habis</h4>
+                            <p class="text-sm text-slate-500 mt-1">Sensor inframerah mendeteksi ruang tetesan mulai kosong pada perangkat IS-001.</p>
+                            <p class="text-xs text-slate-400 mt-2">Kemarin, 22:45 PM</p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Info Perangkat (1 Col) -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
-                        <i data-lucide="info" class="w-5 h-5 mr-2 text-slate-500"></i>
-                        Informasi Perangkat
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Nama Perangkat</p>
-                            <p class="text-sm font-medium text-slate-800">IS-001 · Infus Ruang Demo</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">ID Perangkat</p>
-                            <p class="text-sm font-mono text-slate-800 bg-slate-50 p-1.5 rounded border border-slate-100 inline-block">ESP32-MONITIS-A4</p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
+            <!-- ===================== PAGE: PENGATURAN ===================== -->
+            <div id="page-settings" class="page-section hidden p-4 sm:p-6 lg:p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Pengaturan</h2>
+                    <p class="text-sm text-slate-500 mt-1">Konfigurasi preferensi aplikasi dan notifikasi.</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 max-w-2xl">
+                    <div class="space-y-6 divide-y divide-slate-100">
+                        <div class="flex items-center justify-between pt-2">
                             <div>
-                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Sensor</p>
-                                <p class="text-sm font-medium text-slate-800">Optik (Inframerah)</p>
+                                <p class="font-medium text-slate-800">Notifikasi Suara</p>
+                                <p class="text-sm text-slate-500">Mainkan bunyi alarm saat peringatan kritis muncul.</p>
                             </div>
-                            <div>
-                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Aktuator</p>
-                                <p class="text-sm font-medium text-slate-800">Servo Motor SG90</p>
-                            </div>
+                            <input type="checkbox" class="w-5 h-5 text-primary rounded border-slate-300 focus:ring-primary" checked>
                         </div>
-                        <div class="pt-4 border-t border-slate-100">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm text-slate-500">Status Koneksi</span>
-                                <span class="flex items-center text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-                                    Terhubung (Demo)
-                                </span>
+                        <div class="flex items-center justify-between pt-4">
+                            <div>
+                                <p class="font-medium text-slate-800">Mode Gelap (Dark Mode)</p>
+                                <p class="text-sm text-slate-500">Ubah tampilan dashboard ke tema gelap.</p>
                             </div>
-                            <p class="text-xs text-slate-400 mt-2 text-right">Pembaruan: Real-time</p>
+                            <input type="checkbox" class="w-5 h-5 text-primary rounded border-slate-300 focus:ring-primary">
+                        </div>
+                        <div class="pt-6">
+                            <button class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-blue-700">Simpan Pengaturan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== PAGE: MANAJEMEN PERANGKAT ===================== -->
+            <div id="page-devices" class="page-section hidden p-4 sm:p-6 lg:p-8">
+                <div class="mb-6 flex justify-between items-end">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Manajemen Perangkat</h2>
+                        <p class="text-sm text-slate-500 mt-1">Kelola mikrokontroler ESP32 yang terhubung ke jaringan.</p>
+                    </div>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-blue-700">
+                        <i data-lucide="plus" class="w-4 h-4 inline mr-2"></i> Tambah Perangkat
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Device 1 -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-bold text-slate-800">IS-001</h4>
+                            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full mt-1.5"></span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">Ruang Demo</p>
+                        <p class="text-xs font-mono text-slate-400 mb-4">ID: ESP32-MONITIS-A4</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-slate-50 border border-slate-200 text-slate-600 text-sm py-1.5 rounded hover:bg-slate-100">Edit</button>
+                            <button class="flex-1 bg-red-50 text-red-600 border border-red-100 text-sm py-1.5 rounded hover:bg-red-100">Hapus</button>
+                        </div>
+                    </div>
+                    <!-- Device 2 -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-bold text-slate-800">IS-002</h4>
+                            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full mt-1.5"></span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">IGD Bed 1</p>
+                        <p class="text-xs font-mono text-slate-400 mb-4">ID: ESP32-MONITIS-B2</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-slate-50 border border-slate-200 text-slate-600 text-sm py-1.5 rounded hover:bg-slate-100">Edit</button>
+                            <button class="flex-1 bg-red-50 text-red-600 border border-red-100 text-sm py-1.5 rounded hover:bg-red-100">Hapus</button>
+                        </div>
+                    </div>
+                    <!-- Device 3 -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm opacity-60">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-bold text-slate-800">IS-003</h4>
+                            <span class="w-2.5 h-2.5 bg-red-500 rounded-full mt-1.5"></span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">ICU Bed 4</p>
+                        <p class="text-xs font-mono text-slate-400 mb-4">ID: ESP32-MONITIS-C1</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-slate-50 border border-slate-200 text-slate-600 text-sm py-1.5 rounded hover:bg-slate-100">Edit</button>
+                            <button class="flex-1 bg-red-50 text-red-600 border border-red-100 text-sm py-1.5 rounded hover:bg-red-100">Hapus</button>
                         </div>
                     </div>
                 </div>
@@ -357,23 +566,126 @@
         lucide.createIcons();
     </script>
 
-    <!-- App Logic & Chart.js -->
+    <!-- UI Interaction & Routing Scripts -->
     <script>
-        // State variables
-        let activeTargetTPM = 24; // Nilai target yang diterapkan ke sistem
-        let sliderValue = 24;     // Nilai input slider saat ini
-        let actualTPM = 12;       // Laju pembacaan sensor awal
-        let servoPos = 90;        // Sudut servo awal
+        // Data Global Dummy
+        const dbDevices = [
+            { name: "IS-001 · Infus Ruang Demo", id: "ESP32-MONITIS-A4", isOnline: true },
+            { name: "IS-002 · IGD Bed 1", id: "ESP32-MONITIS-B2", isOnline: true },
+            { name: "IS-003 · ICU Bed 4", id: "ESP32-MONITIS-C1", isOnline: false }
+        ];
+
+        // ---- ROUTING / NAVIGASI SPA ----
+        function showPage(pageId, title) {
+            // 1. Sembunyikan semua halaman
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.add('hidden'));
+            
+            // 2. Tampilkan halaman yang dituju
+            document.getElementById('page-' + pageId).classList.remove('hidden');
+
+            // 3. Update Title & Breadcrumb
+            document.getElementById('breadcrumb-text').innerText = title;
+            document.getElementById('mobile-page-title').innerText = title;
+
+            // 4. Update indikator aktif di Sidebar
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(menu => {
+                // Reset style ke normal
+                menu.classList.remove('bg-primary/10', 'text-primary', 'font-medium', 'active');
+                menu.classList.add('hover:bg-slate-800', 'hover:text-white');
+                
+                // Opacity Ikon normal
+                const icon = menu.querySelector('.icon-menu');
+                if(icon) icon.classList.add('opacity-70');
+            });
+
+            // Set style ke menu aktif
+            const activeMenu = document.querySelector(`.menu-item[data-page="${pageId}"]`);
+            if (activeMenu) {
+                activeMenu.classList.add('bg-primary/10', 'text-primary', 'font-medium', 'active');
+                activeMenu.classList.remove('hover:bg-slate-800', 'hover:text-white');
+                const icon = activeMenu.querySelector('.icon-menu');
+                if(icon) icon.classList.remove('opacity-70');
+            }
+
+            // 5. Tutup sidebar mobile otomatis jika layar kecil
+            if (window.innerWidth < 768) {
+                const sidebar = document.getElementById('sidebar');
+                if (!sidebar.classList.contains('-translate-x-full')) {
+                    toggleSidebar();
+                }
+            }
+
+            // 6. Fix Bug Chart.js (Grafik harus resize saat container display block)
+            if (pageId === 'monitoring' && window.myChartObj) {
+                setTimeout(() => { window.myChartObj.resize(); }, 100);
+            }
+        }
+
+        // ---- SIDEBAR MOBILE TOGGLE ----
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // ---- DEVICE SELECTOR LOGIC ----
+        function toggleDeviceMenu() {
+            const menu = document.getElementById('device-dropdown');
+            menu.classList.toggle('hidden');
+        }
+
+        function changeDevice(index) {
+            const dev = dbDevices[index];
+            // Tutup Menu Dropdown
+            document.getElementById('device-dropdown').classList.add('hidden');
+            
+            // Update Topbar
+            document.getElementById('topbar-device-name').innerText = dev.name;
+            
+            // Update Panel Monitoring Info
+            document.getElementById('info-device-name').innerText = dev.name;
+            document.getElementById('info-device-id').innerText = dev.id;
+            
+            const connStatus = document.getElementById('info-conn-status');
+            if(dev.isOnline) {
+                connStatus.className = 'flex items-center text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full';
+                connStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Terhubung (Demo)';
+            } else {
+                connStatus.className = 'flex items-center text-xs font-semibold text-red-600 bg-red-50 px-2 py-1 rounded-full';
+                connStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span> Offline';
+            }
+        }
+
+        // Tutup dropdown jika klik di luar
+        window.addEventListener('click', function(e) {
+            const selectorDiv = document.querySelector('.relative');
+            if (selectorDiv && !selectorDiv.contains(e.target)) {
+                document.getElementById('device-dropdown').classList.add('hidden');
+            }
+        });
+
+    </script>
+
+    <!-- Logic Simulasi & Chart Monitoring -->
+    <script>
+        // State variables monitoring
+        let activeTargetTPM = 24; 
+        let sliderValue = 24;     
+        let actualTPM = 12;       
+        let servoPos = 90;        
         
-        // Data History untuk Grafik (20 data point)
         const maxDataPoints = 20;
         const timeLabels = Array(maxDataPoints).fill('');
         const actualData = Array(maxDataPoints).fill(actualTPM);
         const targetData = Array(maxDataPoints).fill(activeTargetTPM);
 
-        // Inisialisasi Chart.js
+        // Chart.js Setup
         const ctx = document.getElementById('monitoringChart').getContext('2d');
-        const chart = new Chart(ctx, {
+        window.myChartObj = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timeLabels,
@@ -384,7 +696,7 @@
                         borderColor: '#3568D4',
                         backgroundColor: 'rgba(53, 104, 212, 0.1)',
                         borderWidth: 2,
-                        tension: 0.4, // Smooth curve
+                        tension: 0.4,
                         fill: true,
                         pointRadius: 3,
                         pointBackgroundColor: '#3568D4'
@@ -392,7 +704,7 @@
                     {
                         label: 'Target (TPM)',
                         data: targetData,
-                        borderColor: '#94a3b8', // slate-400
+                        borderColor: '#94a3b8',
                         borderWidth: 2,
                         borderDash: [5, 5],
                         pointRadius: 0,
@@ -405,16 +717,8 @@
                 maintainAspectRatio: false,
                 animation: { duration: 400 },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 70,
-                        grid: { color: '#f1f5f9' },
-                        title: { display: true, text: 'Tetes / Menit' }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { display: false } // Sembunyikan label waktu agar rapi
-                    }
+                    y: { beginAtZero: true, max: 70, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Tetes / Menit' } },
+                    x: { grid: { display: false }, ticks: { display: false } }
                 },
                 plugins: {
                     legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6 } },
@@ -424,99 +728,89 @@
             }
         });
 
-        // Update Text Display based on slider drag
+        // Kontrol Slider
         function updateSliderValue(val) {
             sliderValue = parseInt(val);
             document.getElementById('slider-val-display').innerText = sliderValue;
         }
 
-        // Terapkan Target Button Logic
         function terapkanTarget() {
             activeTargetTPM = sliderValue;
             
-            // Perbarui Card 1 dan Panel Status
             document.getElementById('val-target').innerText = activeTargetTPM;
             document.getElementById('status-target').innerText = activeTargetTPM + ' TPM';
             
-            // Tampilkan Notifikasi Toast Text
             const notif = document.getElementById('notif-target');
             notif.classList.remove('opacity-0');
             setTimeout(() => { notif.classList.add('opacity-0'); }, 3000);
         }
 
-        // Fungsi Helper untuk membatasi nilai
         const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-        // Core Control Loop (Simulasi) - Berjalan setiap 2 detik
+        // Interval Simulasi 2 Detik
         setInterval(() => {
-            // 1. Simulasikan Perubahan Laju Aktual (mendekati target secara bertahap + noise)
             const selisih = activeTargetTPM - actualTPM;
             
             if (Math.abs(selisih) > 1) {
-                // Bergerak mendekati target
                 actualTPM += selisih * 0.4; 
             }
-            // Tambahkan sedikit noise acak (-1 hingga +1)
             actualTPM += (Math.random() * 2) - 1; 
             actualTPM = Math.round(clamp(actualTPM, 0, 70));
             
-            // 2. Kalkulasi Selisih Aktual vs Target
             const currentDiff = actualTPM - activeTargetTPM;
-
-            // 3. Simulasikan Respon Servo (Logika sederhana)
-            // Misalnya: jika terlalu cepat (diff positif), tutup katup (sudut mengecil). Jika lambat, buka katup (sudut membesar)
-            // Asumsi 0 derajat = tertutup rapat, 180 derajat = terbuka penuh
-            servoPos = 90 - (currentDiff * 3); // Pengali sekadar angka demo visual
+            servoPos = 90 - (currentDiff * 3); 
             servoPos = Math.round(clamp(servoPos, 0, 180));
 
-            // 4. Update UI Elements
-            document.getElementById('val-aktual').innerText = actualTPM;
-            document.getElementById('status-aktual').innerText = actualTPM + ' TPM';
-            
-            document.getElementById('val-selisih').innerText = Math.abs(currentDiff);
-            document.getElementById('status-selisih').innerText = (currentDiff > 0 ? '+' : '') + currentDiff + ' TPM';
-
-            document.getElementById('val-servo').innerText = servoPos;
-            document.getElementById('status-servo').innerText = servoPos + '°';
-
-            // 5. Update Status Badge & Visual Marker
-            const badge = document.getElementById('status-badge');
-            const marker = document.getElementById('visual-marker');
-            
-            if (Math.abs(currentDiff) <= 2) {
-                badge.innerText = 'Target Tercapai';
-                badge.className = 'px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700';
-                marker.style.left = '50%';
-                marker.className = 'absolute top-0 bottom-0 w-4 bg-emerald-500 rounded-full transition-all duration-500 ease-out';
-            } else {
-                badge.innerText = 'Menyesuaikan...';
-                badge.className = 'px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-700 animate-pulse';
+            // Update DOM jika elemen ada (hindari error jika belum render)
+            if(document.getElementById('val-aktual')) {
+                document.getElementById('val-aktual').innerText = actualTPM;
+                document.getElementById('status-aktual').innerText = actualTPM + ' TPM';
                 
-                // Pindahkan posisi marker (0% = lambat sekali, 50% = pas, 100% = cepat sekali)
-                let persen = 50 + (currentDiff * 2.5); // * 2.5 agar lebih terlihat grafisnya
-                persen = clamp(persen, 0, 100);
-                marker.style.left = persen + '%';
-                marker.className = 'absolute top-0 bottom-0 w-4 bg-amber-500 rounded-full transition-all duration-500 ease-out';
+                document.getElementById('val-selisih').innerText = Math.abs(currentDiff);
+                document.getElementById('status-selisih').innerText = (currentDiff > 0 ? '+' : '') + currentDiff + ' TPM';
+
+                document.getElementById('val-servo').innerText = servoPos;
+                document.getElementById('status-servo').innerText = servoPos + '°';
+
+                const badge = document.getElementById('status-badge');
+                const marker = document.getElementById('visual-marker');
+                
+                if (Math.abs(currentDiff) <= 2) {
+                    badge.innerText = 'Target Tercapai';
+                    badge.className = 'px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700';
+                    marker.style.left = '50%';
+                    marker.className = 'absolute top-0 bottom-0 w-4 bg-emerald-500 rounded-full transition-all duration-500 ease-out';
+                } else {
+                    badge.innerText = 'Menyesuaikan...';
+                    badge.className = 'px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-700 animate-pulse';
+                    let persen = 50 + (currentDiff * 2.5);
+                    persen = clamp(persen, 0, 100);
+                    marker.style.left = persen + '%';
+                    marker.className = 'absolute top-0 bottom-0 w-4 bg-amber-500 rounded-full transition-all duration-500 ease-out';
+                }
             }
 
-            // 6. Update Grafik Chart.js
             const now = new Date();
             const timeString = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
             
-            // Geser data lama
             timeLabels.shift();
             actualData.shift();
             targetData.shift();
             
-            // Masukkan data baru
             timeLabels.push(timeString);
             actualData.push(actualTPM);
             targetData.push(activeTargetTPM);
             
-            chart.update('none'); // Update tanpa animasi agar lebih ringan
+            // Selalu update chart, meskipun di latar belakang
+            if (window.myChartObj) {
+                window.myChartObj.update('none'); 
+            }
+        }, 2000);
 
-        }, 2000); // 2000 ms = 2 detik
-
+        // Inisialisasi awal memastikan halaman monitoring aktif dan responsif
+        window.onload = () => {
+            showPage('monitoring', 'Monitoring & Kontrol');
+        };
     </script>
 </body>
 </html>
