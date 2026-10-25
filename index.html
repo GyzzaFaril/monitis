@@ -1,128 +1,522 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MONITIS — UI Reference</title>
-<style>
-:root{--navy:#142642;--blue:#3569d4;--pale:#eaf1ff;--ink:#192941;--muted:#748198;--line:#e5ebf3;--bg:#f5f7fb;--green:#168768;--amber:#b8790c}*{box-sizing:border-box}body{margin:0;font:14px Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{background:var(--navy);color:#c6d2e6;padding:25px 16px;display:flex;flex-direction:column;gap:30px}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.logo{height:40px;width:40px;border-radius:12px;background:#4778e5;display:grid;place-items:center;color:white;font-size:23px;font-weight:800}.brand b{font-size:20px;color:white}.brand small{display:block;font-size:9px;letter-spacing:1.4px;color:#9fb0cb;margin-top:3px}.label{font-size:10px;letter-spacing:1.6px;color:#8294b2;padding:0 12px;margin-bottom:9px}.nav{display:grid;gap:5px}.nav button{border:0;border-radius:10px;background:transparent;color:#c3cee0;text-align:left;padding:12px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#3159a8;color:white}.ico{width:20px;text-align:center;font-size:17px}.device{margin-top:auto;border:1px solid #ffffff20;border-radius:13px;padding:14px;background:#ffffff08;color:white;font-weight:700}.device small{display:block;color:#9fb0cb;font-weight:400;line-height:1.7;margin-top:8px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#35d5a2;margin-right:8px}.top{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px}.muted{color:var(--muted)}.profile{display:flex;align-items:center;gap:10px}.avatar{width:36px;height:36px;border-radius:50%;background:#dce8ff;color:#2c57ad;display:grid;place-items:center;font-weight:800}.profile small{display:block;color:var(--muted);font-size:10px}.content{padding:28px 32px;max-width:1550px;margin:auto}.page{display:none}.page.active{display:block}.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:22px}.eyebrow{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:7px}.heading h2{font-size:27px;letter-spacing:-.7px;margin:0 0 8px}.heading p{color:var(--muted);margin:0;line-height:1.5}.btn{background:white;border:1px solid var(--line);border-radius:9px;padding:10px 13px;color:#465671;font-weight:650;font-size:12px}.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}.banner{padding:12px 14px;border:1px solid #f0dfb7;background:#fff8e8;color:#805719;border-radius:10px;font-size:12px;margin-bottom:18px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.card{background:white;border:1px solid var(--line);border-radius:15px;box-shadow:0 4px 16px #18304f05;min-width:0}.stat{padding:18px}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:10px;background:var(--pale);color:var(--blue);display:grid;place-items:center;font-size:17px}.value{font-size:29px;letter-spacing:-1px;font-weight:780;margin:13px 0 6px}.value small{font-size:12px;color:var(--muted);letter-spacing:0}.stat-foot{font-size:10px;color:var(--muted)}.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:17px;margin-bottom:17px}.bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:17px}.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:19px 20px 0}.card-head h3{font-size:14px;margin:0 0 5px}.card-head p{font-size:11px;color:var(--muted);margin:0}.select{border:1px solid var(--line);border-radius:8px;padding:7px;background:white;font-size:11px;color:#52617a}.chart{padding:10px 16px 13px}.chart svg{display:block;width:100%;height:auto}.legend{padding:0 20px 18px;display:flex;gap:17px;font-size:10px;color:var(--muted)}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);margin-right:6px}.system{padding:12px 20px 18px}.sysrow{display:flex;align-items:center;gap:11px;padding:13px 0;border-bottom:1px solid #eef1f6}.sysrow:last-child{border:0}.sysicon{width:36px;height:36px;background:#f1f5fb;border-radius:10px;display:grid;place-items:center;font-size:16px}.syscopy{flex:1}.syscopy b{display:block;font-size:12px;margin-bottom:4px}.syscopy small{font-size:10px;color:var(--muted)}.good{color:var(--green);font-size:10px;font-weight:750}.tablewrap{padding:13px 17px 18px;overflow:auto}.table{width:100%;border-collapse:collapse;white-space:nowrap}.table th{text-align:left;font-size:10px;color:#8995a8;padding:11px 9px;border-bottom:1px solid var(--line)}.table td{font-size:11px;padding:13px 9px;border-bottom:1px solid #f0f2f6}.table tr:last-child td{border:0}.pill{padding:5px 8px;border-radius:7px;background:#e5f7ef;color:var(--green);font-size:10px;font-weight:750}.pill.warn{background:#fff4df;color:#a36a09}.alerts{padding:12px 20px 18px}.alert{display:flex;gap:10px;padding:13px 0;border-bottom:1px solid #eef1f6}.alert:last-child{border:0}.alertmark{width:31px;height:31px;border-radius:9px;background:#fff2dc;color:#b8790c;display:grid;place-items:center;flex-shrink:0}.alertmark.info{background:var(--pale);color:var(--blue)}.alert b{font-size:11px}.alert p{font-size:10px;color:var(--muted);line-height:1.5;margin:4px 0}.alert time{font-size:9px;color:#9aa4b4}.sectioncard{padding:22px;margin-bottom:17px}.sectioncard h3{font-size:15px;margin:0 0 6px}.sectioncard>p{font-size:12px;color:var(--muted);margin:0 0 20px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:17px}.control{border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:10px}.control h4{font-size:13px;margin:0}.big{font-size:34px;font-weight:800;margin:12px 0}.big small{font-size:12px;color:var(--muted);font-weight:500}.range{width:100%;accent-color:var(--blue);margin:10px 0}.rangeends{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #eef1f6}.row:last-child{border:0}.row label{font-weight:650;font-size:12px}.row small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.field{width:145px;max-width:48%;border:1px solid var(--line);padding:9px;border-radius:8px;background:white}.switch{accent-color:var(--blue);width:37px;height:20px}.foot{text-align:center;padding:25px 0 0;color:#9aa4b4;font-size:10px}
-@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.grid,.bottom{grid-template-columns:1fr}.content{padding:22px}.top{padding:0 22px}}@media(max-width:680px){.app{grid-template-columns:1fr}.sidebar{padding:13px;gap:14px}.label,.device{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px}.top{height:60px;padding:0 14px}.profile>div:last-child{display:none}.content{padding:18px 12px}.heading{display:block}.heading h2{font-size:23px}.heading .btn{margin-top:12px}.stats{gap:9px}.stat{padding:13px}.value{font-size:24px}.twocol{grid-template-columns:1fr}.card-head{padding:16px 14px 0}.tablewrap,.alerts{padding-left:10px;padding-right:10px}}
-</style></head><body><div class="app">
-<aside class="sidebar"><div class="brand"><div class="logo">✚</div><div><b>MONITIS</b><small>SMART INFUSION SYSTEM</small></div></div><div><div class="label">Workspace</div><nav class="nav"><button class="active" data-page="dashboard"><span class="ico">▦</span>Dashboard</button><button data-page="monitoring"><span class="ico">⌁</span>Monitoring &amp; Kontrol</button><button data-page="history"><span class="ico">◷</span>Riwayat Data</button><button data-page="alerts"><span class="ico">♧</span>Peringatan</button></nav></div><div><div class="label">System</div><nav class="nav"><button data-page="settings"><span class="ico">⚙</span>Pengaturan</button></nav></div><div class="device"><span class="dot"></span> ESP32 — IS-001<small>Perangkat terhubung<br>Sinkronisasi: demo</small></div></aside>
-<main><header class="top"><div class="muted">MONITIS　/　<strong id="crumb" style="color:#192941">Dashboard</strong></div><div class="profile"><button class="btn" data-goto="alerts">♧</button><div class="avatar">GF</div><div><b style="font-size:12px">Operator</b><small>Prototype workspace</small></div></div></header><div class="content">
-<section class="page active" id="page-dashboard"><div class="heading"><div><div class="eyebrow">Ringkasan perangkat</div><h2>Dashboard</h2><p>Pantau laju tetesan, TPM, dan status perangkat MONITIS.</p></div><div><button class="btn" id="refresh">↻ Perbarui tampilan</button> <button class="btn primary" data-goto="monitoring">Buka kontrol →</button></div></div><div class="banner">ⓘ <b>Mode demonstrasi.</b> Semua angka dan grafik merupakan data simulasi, bukan pembacaan perangkat nyata.</div>
-<div class="stats"><div class="card stat"><div class="stat-top">Laju tetesan <span class="stat-icon">⌁</span></div><div class="value" id="tpm">24 <small>TPM</small></div><div class="stat-foot">Target: <span id="targetInline">24</span> TPM</div></div><div class="card stat"><div class="stat-top">Status tetesan <span class="stat-icon">♧</span></div><div class="value">428 <small>TPM</small></div><div class="stat-foot">Data simulasi sensor optik</div></div><div class="card stat"><div class="stat-top">Estimasi berbasis TPM <span class="stat-icon">◉</span></div><div class="value">320 <small>mL*</small></div><div class="stat-foot">Estimasi simulasi, perlu kalibrasi</div></div><div class="card stat"><div class="stat-top">Status perangkat <span class="stat-icon">⌁</span></div><div class="value" style="font-size:24px;color:var(--green)">Online</div><div class="stat-foot">ESP32 IS-001 · Wi-Fi tersambung (demo)</div></div></div>
-<div class="grid"><div class="card"><div class="card-head"><div><h3>Tren laju tetesan</h3><p>Perubahan TPM dari waktu ke waktu</p></div><select class="select"><option>30 menit terakhir</option><option>1 jam terakhir</option><option>6 jam terakhir</option></select></div><div class="chart"><svg viewBox="0 0 620 245" aria-label="Grafik TPM simulasi"><defs><linearGradient id="shade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3569d4" stop-opacity=".2"/><stop offset="1" stop-color="#3569d4" stop-opacity="0"/></linearGradient></defs><g stroke="#edf1f6"><line x1="48" y1="25" x2="600" y2="25"/><line x1="48" y1="70" x2="600" y2="70"/><line x1="48" y1="115" x2="600" y2="115"/><line x1="48" y1="160" x2="600" y2="160"/><line x1="48" y1="205" x2="600" y2="205"/></g><g fill="#8a96a9" font-size="10"><text x="12" y="29">40</text><text x="12" y="74">30</text><text x="12" y="119">20</text><text x="12" y="164">10</text><text x="20" y="209">0</text><text x="48" y="229">18:15</text><text x="180" y="229">18:22</text><text x="315" y="229">18:29</text><text x="450" y="229">18:36</text><text x="565" y="229">18:45</text></g><path d="M48 205 L48 120 L91 110 L134 124 L177 98 L220 108 L263 91 L306 103 L349 86 L392 96 L435 80 L478 92 L521 82 L564 92 L600 88 L600 205 Z" fill="url(#shade)"/><path d="M48 120 L91 110 L134 124 L177 98 L220 108 L263 91 L306 103 L349 86 L392 96 L435 80 L478 92 L521 82 L564 92 L600 88" fill="none" stroke="#3569d4" stroke-width="3" stroke-linecap="round"/><path d="M48 97 L600 97" stroke="#0f9f91" stroke-width="1.5" stroke-dasharray="5 5"/></svg></div><div class="legend"><span><i></i> TPM aktual</span><span><i style="background:#0f9f91"></i> Target TPM</span></div></div>
-<div class="card"><div class="card-head"><div><h3>Status komponen</h3><p>Kondisi sensor dan aktuator</p></div><span class="pill">● Normal</span></div><div class="system"><div class="sysrow"><div class="sysicon">⌁</div><div class="syscopy"><b>Sensor optik</b><small>Penghitung tetesan</small></div><span class="good">Aktif</span></div><div class="sysrow"><div class="sysicon">⚖</div><div class="syscopy"><b>Sensor optik</b><small>Pembacaan TPM</small></div><span class="good">Aktif</span></div><div class="sysrow"><div class="sysicon">↻</div><div class="syscopy"><b>Servo pengatur tetesan</b><small>Posisi simulasi: 42°</small></div><span class="good">Siap</span></div><div class="sysrow"><div class="sysicon">⌁</div><div class="syscopy"><b>Koneksi Wi-Fi</b><small>Sinkronisasi data</small></div><span class="good">Terhubung</span></div></div></div></div>
-<div class="bottom"><div class="card"><div class="card-head"><div><h3>Data terbaru</h3><p>Contoh telemetri simulasi</p></div><button class="btn" data-goto="history">Lihat semua →</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Waktu</th><th>TPM</th><th>TPM</th><th>Servo</th><th>Status</th></tr></thead><tbody><tr><td>18:45:10</td><td>24</td><td>24 TPM</td><td>42°</td><td><span class="pill">Normal</span></td></tr><tr><td>18:44:10</td><td>23</td><td>23 TPM</td><td>42°</td><td><span class="pill">Normal</span></td></tr><tr><td>18:43:10</td><td>27</td><td>27 TPM</td><td>40°</td><td><span class="pill warn">Penyesuaian</span></td></tr></tbody></table></div></div><div class="card"><div class="card-head"><div><h3>Aktivitas &amp; peringatan</h3><p>Informasi sistem terbaru</p></div><button class="btn" data-goto="alerts">Semua →</button></div><div class="alerts"><div class="alert"><div class="alertmark info">↻</div><div><b>Servo melakukan penyesuaian</b><p>Posisi berubah dari 40° ke 42° dalam mode simulasi.</p><time>18:43 · Informasi</time></div></div><div class="alert"><div class="alertmark">ⓘ</div><div><b>Verifikasi silang sensor</b><p>Pastikan nilai TPM dan tren TPM konsisten.</p><time>18:40 · Pengingat pengujian</time></div></div></div></div></div></section>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONITIS - Monitoring & Kontrol</title>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { primary: '#3568D4', background: '#F4F7FB' }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js & Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Styling tambahan untuk slider agar lebih modern */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #3568D4;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-slate-800 font-sans flex h-screen overflow-hidden">
 
-<section class="page" id="page-devices">
-  <div class="heading"><div><div class="eyebrow">Workspace produk &amp; proyek</div><h2>Manajemen Perangkat</h2><p>Daftarkan beberapa produk/proyek MONITIS, simpan identitas masing-masing, lalu pilih unit yang ingin dipantau.</p></div><div class="actions"><button class="btn primary" id="addDeviceBtn">＋ Tambah produk / proyek</button></div></div>
-  <div class="demo-banner"><span>ⓘ</span><div><b>Manajemen demo lokal.</b> Data produk yang ditambahkan tersimpan sementara di browser selama halaman ini terbuka. Penyimpanan permanen dan koneksi ESP32 memerlukan backend/database.</div></div>
-  <div class="stats">
-    <div class="card stat"><div class="stat-top">Total produk/proyek <span class="stat-icon">▣</span></div><div class="stat-value" id="deviceTotal">3</div><div class="stat-foot">Item dalam daftar</div></div>
-    <div class="card stat"><div class="stat-top">Online <span class="stat-icon">⌁</span></div><div class="stat-value" id="deviceOnline" style="color:var(--green)">2</div><div class="stat-foot">Status contoh/simulasi</div></div>
-    <div class="card stat"><div class="stat-top">Perlu diperiksa <span class="stat-icon">ⓘ</span></div><div class="stat-value" id="deviceAttention" style="color:var(--amber)">1</div><div class="stat-foot">Status contoh/simulasi</div></div>
-    <div class="card stat"><div class="stat-top">Produk aktif <span class="stat-icon">⌂</span></div><div class="stat-value" id="activeDeviceStat" style="font-size:23px">IS-001</div><div class="stat-foot">Pilihan saat ini</div></div>
-  </div>
-  <div class="card">
-    <div class="card-head"><div><h3>Daftar produk / proyek</h3><p>Setiap entri mewakili satu unit/proyek monitoring yang dikelola secara terpisah</p></div><input class="field" id="deviceSearch" placeholder="Cari nama, ID, atau lokasi..." style="max-width:220px"></div>
-    <div class="table-wrap"><table class="table" id="deviceTable"><thead><tr><th>Nama produk / proyek</th><th>ID unik</th><th>Lokasi / kelompok</th><th>Status koneksi</th><th>Target TPM</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
-      <tr data-id="IS-001" data-name="MONITIS Lab 01" data-location="MONITIS Lab" data-target="24" data-connection="Online" data-status="Normal"><td>MONITIS Lab 01</td><td>IS-001</td><td>MONITIS Lab</td><td><span class="tag">Online</span></td><td>24 TPM</td><td><span class="tag">Normal</span></td><td><button class="btn choose-device" data-id="IS-001">Pilih</button> <button class="btn edit-device" data-id="IS-001">Edit</button></td></tr>
-      <tr data-id="IS-002" data-name="MONITIS Lab 02" data-location="MONITIS Lab" data-target="30" data-connection="Online" data-status="Periksa"><td>MONITIS Lab 02</td><td>IS-002</td><td>MONITIS Lab</td><td><span class="tag">Online</span></td><td>30 TPM</td><td><span class="tag warn">Periksa</span></td><td><button class="btn choose-device" data-id="IS-002">Pilih</button> <button class="btn edit-device" data-id="IS-002">Edit</button></td></tr>
-      <tr data-id="IS-003" data-name="MONITIS Demo 03" data-location="MONITIS Demo" data-target="24" data-connection="Offline" data-status="Tidak ada data"><td>MONITIS Demo 03</td><td>IS-003</td><td>MONITIS Demo</td><td><span class="tag warn">Offline</span></td><td>24 TPM</td><td><span class="tag warn">Tidak ada data</span></td><td><button class="btn choose-device" data-id="IS-003">Pilih</button> <button class="btn edit-device" data-id="IS-003">Edit</button></td></tr>
-    </tbody></table></div>
-  </div>
-  <div class="card section-card" style="margin-top:18px"><h3>Produk / proyek terpilih</h3><p>Identitas unit yang sedang aktif pada aplikasi demo.</p><div class="form-row"><div><label>Nama produk / proyek</label><small>Item yang sedang dipilih</small></div><strong id="activeDeviceName">MONITIS Lab 01</strong></div><div class="form-row"><div><label>ID unik perangkat</label><small>Gunakan ID berbeda untuk setiap ESP32</small></div><strong id="activeDeviceLabel">IS-001</strong></div><div class="form-row"><div><label>Target TPM tersimpan</label><small>Target demo khusus perangkat terpilih</small></div><strong id="activeDeviceTarget">24 TPM</strong></div></div>
-</section>
+    <!-- Sidebar (Desktop) -->
+    <aside class="w-64 bg-[#0F172A] text-slate-300 flex-shrink-0 hidden md:flex flex-col h-full z-20">
+        <div class="h-16 flex items-center px-6 border-b border-slate-800 shrink-0">
+            <i data-lucide="activity" class="text-primary w-6 h-6 mr-3"></i>
+            <div>
+                <h1 class="text-white font-bold tracking-wide text-lg leading-tight">MONITIS</h1>
+                <p class="text-[10px] text-slate-400 font-medium tracking-wider">SMART INFUSION SYSTEM</p>
+            </div>
+        </div>
+        <div class="flex-1 overflow-y-auto py-6 px-4 space-y-8">
+            <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-2">Workspace</p>
+                <nav class="space-y-1">
+                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 opacity-70"></i> Dashboard
+                    </a>
+                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg bg-primary/10 text-primary font-medium">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4 mr-3"></i> Monitoring & Kontrol
+                    </a>
+                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="history" class="w-4 h-4 mr-3 opacity-70"></i> Riwayat Data
+                    </a>
+                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 mr-3 opacity-70"></i> Peringatan
+                    </a>
+                </nav>
+            </div>
+            <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-2">System</p>
+                <nav class="space-y-1">
+                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="settings" class="w-4 h-4 mr-3 opacity-70"></i> Pengaturan
+                    </a>
+                    <a href="#" class="flex items-center px-2 py-2 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                        <i data-lucide="cpu" class="w-4 h-4 mr-3 opacity-70"></i> Manajemen Perangkat
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </aside>
 
-<section class="page" id="page-monitoring">
-  <div class="heading"><div><div class="eyebrow">Kontrol laju tetesan</div><h2>Monitoring &amp; Kontrol</h2><p>Atur target laju tetesan. MONITIS menggunakan servo sebagai aktuator untuk menyesuaikan mekanisme tetesan secara otomatis.</p></div><span class="status-pill"><span class="dot"></span> Demo aktif</span></div>
-  <div class="demo-banner"><span>ⓘ</span><div><b>Mode demonstrasi.</b> Pengaturan target di halaman ini hanya simulasi UI. Servo fisik belum terhubung, dan target TPM harus dikalibrasi serta diuji menggunakan cairan simulasi.</div></div>
-  <div class="monitor-grid">
-    <div class="card section-card"><h3>Kontrol laju tetesan</h3><p>Target TPM adalah satu-satunya parameter kontrol yang dapat diubah operator. Posisi servo merupakan keluaran aktuator yang ditentukan oleh sistem, bukan kontrol manual terpisah.</p>
-      <div class="control-box"><div style="display:flex;justify-content:space-between;align-items:center"><h4>Target laju tetesan</h4><span class="tag blue">Setpoint</span></div><div class="big-number"><span id="targetDisplay">24</span> <small>tetes/menit (TPM)</small></div><input class="range" id="targetRange" type="range" min="8" max="60" value="24"><div class="range-labels"><span>8 TPM</span><span>60 TPM</span></div><div class="form-row"><div><label>Target yang dipilih</label><small>Nilai referensi kontrol</small></div><strong id="targetText">24 TPM</strong></div><button class="btn primary" id="applyTarget" style="width:100%;margin-top:16px">Terapkan target (demo)</button><div id="targetMessage" style="font-size:11px;color:var(--green);margin-top:10px;display:none">Target TPM demo diperbarui. Sistem akan menyesuaikan servo pada implementasi sebenarnya.</div></div>
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 flex flex-col min-w-0 h-full">
+        <!-- Topbar -->
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 shrink-0 z-10 shadow-sm">
+            <div class="flex items-center">
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden mr-4 text-slate-500 hover:text-slate-800">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                <div class="hidden sm:flex text-sm text-slate-500 items-center">
+                    <span>MONITIS</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+                    <span class="font-medium text-slate-800">Monitoring & Kontrol</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <!-- Device Selector -->
+                <div class="hidden sm:flex items-center bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-md text-sm cursor-pointer hover:bg-slate-100 transition-colors">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
+                    <span class="font-medium text-slate-700">IS-001 &middot; Infus Ruang Demo</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 ml-2 text-slate-400"></i>
+                </div>
+                <!-- Icons -->
+                <button class="relative text-slate-400 hover:text-slate-600">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-semibold cursor-pointer">
+                    OP
+                </div>
+            </div>
+        </header>
+
+        <!-- Scrollable Page Content -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 relative">
+            
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold text-primary tracking-wider uppercase mb-1 block">Kontrol Laju Tetesan</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Monitoring & Kontrol</h2>
+                        <p class="text-sm text-slate-500 mt-2 max-w-2xl leading-relaxed">
+                            Pantau laju tetesan aktual dan atur target TPM (Tetes Per Menit) untuk mengendalikan mekanisme tetesan infus secara otomatis.
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center px-3 py-1.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold">
+                        <i data-lucide="test-tube" class="w-3.5 h-3.5 mr-1.5"></i> MODE DEMO AKTIF
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-sm font-medium text-slate-500">Target TPM</p>
+                        <div class="p-2 bg-blue-50 text-primary rounded-lg">
+                            <i data-lucide="target" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-1">
+                            <h3 class="text-3xl font-bold text-slate-800" id="val-target">24</h3>
+                            <span class="text-sm font-medium text-slate-500">TPM</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Ditentukan operator</p>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-sm font-medium text-slate-500">Laju Aktual</p>
+                        <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
+                            <i data-lucide="droplets" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-1">
+                            <h3 class="text-3xl font-bold text-slate-800" id="val-aktual">0</h3>
+                            <span class="text-sm font-medium text-slate-500">TPM</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Pembacaan sensor optik</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-sm font-medium text-slate-500">Selisih TPM</p>
+                        <div class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                            <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-1">
+                            <h3 class="text-3xl font-bold text-slate-800" id="val-selisih">0</h3>
+                            <span class="text-sm font-medium text-slate-500">TPM</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Target vs Aktual</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-sm font-medium text-slate-500">Status Servo</p>
+                        <div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
+                            <i data-lucide="rotate-cw" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-1">
+                            <h3 class="text-3xl font-bold text-slate-800" id="val-servo">0</h3>
+                            <span class="text-sm font-medium text-slate-500">&deg; (Derajat)</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Output aktuator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control & Status Panels -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                
+                <!-- Panel Kontrol (2 Columns span on large) -->
+                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-6 flex items-center">
+                        <i data-lucide="sliders-horizontal" class="w-5 h-5 mr-2 text-primary"></i>
+                        Kontrol Laju Tetesan
+                    </h3>
+                    
+                    <div class="flex-1 flex flex-col justify-center items-center py-4">
+                        <p class="text-sm text-slate-500 font-medium mb-2">Target Tetesan Baru</p>
+                        <div class="flex items-baseline gap-2 mb-8">
+                            <span class="text-6xl font-bold text-primary tracking-tight" id="slider-val-display">24</span>
+                            <span class="text-lg font-semibold text-slate-400">TPM</span>
+                        </div>
+                        
+                        <div class="w-full max-w-md px-4 mb-4">
+                            <input type="range" id="tpm-slider" min="8" max="60" value="24" oninput="updateSliderValue(this.value)">
+                            <div class="flex justify-between text-xs font-medium text-slate-400 mt-3">
+                                <span>8 TPM</span>
+                                <span>60 TPM</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-col items-center gap-3">
+                            <button onclick="terapkanTarget()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-lg shadow-sm transition-colors focus:ring-4 focus:ring-primary/20 flex items-center">
+                                <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
+                                Terapkan Target
+                            </button>
+                            <p id="notif-target" class="text-xs text-emerald-600 font-medium opacity-0 transition-opacity duration-300">
+                                Target demo berhasil diperbarui.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel Status Kontrol (1 Column span on large) -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-6 flex items-center">
+                        <i data-lucide="cpu" class="w-5 h-5 mr-2 text-slate-500"></i>
+                        Status Kontrol Otomatis
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Target TPM</span>
+                            <span class="text-sm font-semibold text-slate-800" id="status-target">24 TPM</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Laju Aktual</span>
+                            <span class="text-sm font-semibold text-slate-800" id="status-aktual">0 TPM</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Selisih</span>
+                            <span class="text-sm font-semibold text-slate-800" id="status-selisih">0 TPM</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Posisi Servo</span>
+                            <span class="text-sm font-semibold text-slate-800" id="status-servo">0&deg;</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-sm text-slate-500">Status</span>
+                            <span id="status-badge" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-slate-100 text-slate-600">
+                                Menunggu Data
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Indicator Bar -->
+                    <div class="mt-6">
+                        <div class="flex justify-between text-xs text-slate-400 mb-1">
+                            <span>Lambat</span>
+                            <span>Sesuai</span>
+                            <span>Cepat</span>
+                        </div>
+                        <div class="h-2 w-full bg-slate-100 rounded-full relative overflow-hidden">
+                            <!-- Indicator marker -->
+                            <div id="visual-marker" class="absolute top-0 bottom-0 w-4 bg-primary rounded-full transition-all duration-500 ease-out" style="left: 50%; transform: translateX(-50%);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart & Device Info -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Grafik (2 Cols) -->
+                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                        <i data-lucide="line-chart" class="w-5 h-5 mr-2 text-primary"></i>
+                        Grafik Laju Tetesan (Demo)
+                    </h3>
+                    <div class="w-full h-[300px] relative">
+                        <canvas id="monitoringChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Info Perangkat (1 Col) -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                        <i data-lucide="info" class="w-5 h-5 mr-2 text-slate-500"></i>
+                        Informasi Perangkat
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Nama Perangkat</p>
+                            <p class="text-sm font-medium text-slate-800">IS-001 · Infus Ruang Demo</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">ID Perangkat</p>
+                            <p class="text-sm font-mono text-slate-800 bg-slate-50 p-1.5 rounded border border-slate-100 inline-block">ESP32-MONITIS-A4</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Sensor</p>
+                                <p class="text-sm font-medium text-slate-800">Optik (Inframerah)</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Aktuator</p>
+                                <p class="text-sm font-medium text-slate-800">Servo Motor SG90</p>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate-500">Status Koneksi</span>
+                                <span class="flex items-center text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+                                    Terhubung (Demo)
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-2 text-right">Pembaruan: Real-time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
-    <div class="card section-card"><h3>Status kontrol otomatis</h3><p>Servo bergerak sebagai respons sistem untuk mendekati target TPM. Operator tidak mengatur sudut servo secara langsung dari halaman ini.</p>
-      <div class="control-box"><div style="display:flex;justify-content:space-between;align-items:center"><h4>Status aktuator servo</h4><span class="tag warn">Simulasi</span></div><div class="big-number"><span id="servoDisplay">42</span><small>° · posisi simulasi</small></div><div class="form-row"><div><label>Mode kontrol</label><small>Servo mengikuti target laju tetesan</small></div><strong style="color:var(--green)">Otomatis</strong></div><div class="form-row"><div><label>TPM aktual</label><small>Data sensor optik simulasi</small></div><strong id="actualTpmDisplay">24 TPM</strong></div><div class="form-row"><div><label>Status target</label><small>Perbandingan aktual dengan target</small></div><span class="tag" id="targetStatus">Sesuai</span></div><p style="margin:14px 0 0">Catatan: hubungan sudut servo terhadap TPM perlu dikalibrasi secara empiris. Angka posisi servo hanya ilustrasi.</p></div>
-    </div>
-  </div>
-  <div class="card section-card"><h3>Data sensor untuk umpan balik</h3><p>Sensor optik menghitung tetesan aktual. Sistem membandingkan hasil pengukuran dengan target untuk menentukan apakah servo perlu disesuaikan.</p><div class="form-row"><div><label>Sensor optik</label><small>Input pengukuran TPM</small></div><span class="tag">Aktif (demo)</span></div><div class="form-row"><div><label>Algoritma kontrol</label><small>Bandingkan TPM aktual dan target, lalu sesuaikan servo secara bertahap</small></div><span class="tag blue">Konsep</span></div></div>
-</section>
 
-<section class="page" id="page-history"><div class="heading"><div><div class="eyebrow">Catatan pengukuran</div><h2>Riwayat Data</h2><p>Contoh telemetri untuk ekspor dan analisis pengujian.</p></div><button class="btn" id="export">↓ Ekspor CSV demo</button></div><div class="banner">Semua baris di bawah adalah <b>data contoh</b>, bukan data dari ESP32 atau database.</div><div class="card"><div class="card-head"><div><h3>Riwayat telemetri</h3><p>TPM, TPM, posisi servo, dan status</p></div><select class="select" id="filter"><option value="all">Semua status</option><option>Normal</option><option>Penyesuaian</option><option>Periksa</option></select></div><div class="tablewrap"><table class="table" id="history"><thead><tr><th>Waktu</th><th>TPM aktual</th><th>Target</th><th>Posisi servo</th><th>Status</th><th>Konsistensi</th><th>Status</th></tr></thead><tbody><tr data-status="Normal"><td>18:45:10</td><td>24</td><td>24</td><td>24 TPM</td><td>42°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr><tr data-status="Normal"><td>18:44:10</td><td>23</td><td>24</td><td>23 TPM</td><td>42°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr><tr data-status="Penyesuaian"><td>18:43:10</td><td>27</td><td>24</td><td>27 TPM</td><td>40°</td><td>Konsisten</td><td><span class="pill warn">Penyesuaian</span></td></tr><tr data-status="Normal"><td>18:42:10</td><td>25</td><td>24</td><td>25 TPM</td><td>41°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr><tr data-status="Periksa"><td>18:41:10</td><td>8</td><td>24</td><td>8 TPM</td><td>41°</td><td>Perlu verifikasi</td><td><span class="pill warn">Periksa</span></td></tr><tr data-status="Normal"><td>18:40:10</td><td>24</td><td>24</td><td>24 TPM</td><td>42°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr></tbody></table></div></div></section>
-<section class="page" id="page-alerts"><div class="heading"><div><div class="eyebrow">Pusat informasi</div><h2>Peringatan &amp; Aktivitas</h2><p>Contoh notifikasi untuk rancangan dashboard.</p></div><button class="btn" id="read">Tandai dibaca</button></div><div class="banner">Peringatan demo bukan diagnosis dan tidak menggantikan pemantauan tenaga kesehatan.</div><div class="card"><div class="card-head"><div><h3>Aktivitas terbaru</h3><p>Informasi yang perlu ditinjau operator</p></div></div><div class="alerts" id="alertsList"><div class="alert"><div class="alertmark">!</div><div><b>TPM berbeda dari target</b><p>Contoh: TPM aktual di luar toleransi. Tinjau data sensor dan mekanisme servo dalam pengujian simulasi.</p><time>18:41 · Perlu pemeriksaan</time></div></div><div class="alert"><div class="alertmark info">↻</div><div><b>Servo menyesuaikan posisi</b><p>Perubahan posisi servo tercatat pada log simulasi.</p><time>18:43 · Informasi</time></div></div><div class="alert"><div class="alertmark info">⌁</div><div><b>Sensor optik menerima pembacaan</b><p>Data tetesan contoh diterima dan diproses.</p><time>18:44 · Informasi</time></div></div><div class="alert"><div class="alertmark info">✓</div><div><b>Perangkat tersambung</b><p>Status koneksi simulasi: online.</p><time>18:45 · Sistem</time></div></div></div></div></section>
-<section class="page" id="page-settings"><div class="heading"><div><div class="eyebrow">Konfigurasi aplikasi</div><h2>Pengaturan</h2><p>Contoh identitas perangkat dan preferensi notifikasi.</p></div><button class="btn primary" id="save">Simpan perubahan demo</button></div><div class="banner">Pengaturan hanya mengubah tampilan lokal; belum tersambung ke backend atau ESP32.</div><div class="card sectioncard"><h3>Informasi perangkat</h3><p>Identitas dan koneksi prototipe.</p><div class="row"><div><label>Nama perangkat</label><small>Nama yang tampil di dashboard</small></div><input class="field" value="MONITIS IS-001"></div><div class="row"><div><label>Perangkat kontrol</label><small>Mikrokontroler utama</small></div><input class="field" value="ESP32 DevKit" readonly></div><div class="row"><div><label>Status Wi-Fi</label><small>Status simulasi</small></div><span class="pill">Terhubung</span></div><div class="row"><div><label>Interval telemetri</label><small>Jarak antar sampel</small></div><select class="field"><option>1 detik</option><option>2 detik</option><option>5 detik</option><option>10 detik</option></select></div></div><div class="card sectioncard"><h3>Preferensi notifikasi</h3><p>Atur notifikasi visual pada dashboard demo.</p><div class="row"><div><label>Ketidaksesuaian TPM</label><small>Tampilkan peringatan saat TPM berbeda dari target</small></div><input type="checkbox" class="switch" checked></div><div class="row"><div><label>Ketidakkonsistenan sensor</label><small>Tandai data yang perlu diperiksa</small></div><input type="checkbox" class="switch" checked></div><div class="row"><div><label>Status koneksi</label><small>Tampilkan status online/offline</small></div><input type="checkbox" class="switch" checked></div></div></section><div class="foot">MONITIS UI Concept · Prototype only · Data simulasi · Belum untuk penggunaan klinis</div>
-</div></main></div>
-<script>
-const names={dashboard:'Dashboard',monitoring:'Monitoring & Kontrol',history:'Riwayat Data',alerts:'Peringatan',settings:'Pengaturan'};function show(name){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));document.getElementById('crumb').textContent=names[name]||'Dashboard';window.scrollTo({top:0,behavior:'smooth'})}document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));let tr=document.getElementById('targetRange');tr.addEventListener('input',()=>{document.getElementById('targetVal').textContent=tr.value;document.getElementById('targetText').textContent=tr.value+' TPM'});document.getElementById('apply').addEventListener('click',()=>{document.getElementById('targetInline').textContent=tr.value;document.getElementById('applyMsg').style.display='block'});document.getElementById('servoRange').addEventListener('input',e=>document.getElementById('servoVal').textContent=e.target.value);document.getElementById('refresh').addEventListener('click',e=>{e.target.textContent='✓ Tampilan diperbarui';setTimeout(()=>e.target.textContent='↻ Perbarui tampilan',1300)});document.getElementById('filter').addEventListener('change',e=>document.querySelectorAll('#history tbody tr').forEach(r=>r.style.display=e.target.value==='all'||r.dataset.status===e.target.value?'':'none'));document.getElementById('read').addEventListener('click',e=>{document.querySelectorAll('#alertsList .alertmark').forEach(x=>x.style.opacity='.45');e.target.textContent='✓ Sudah ditandai'});document.getElementById('save').addEventListener('click',e=>{e.target.textContent='✓ Tersimpan (demo)';setTimeout(()=>e.target.textContent='Simpan perubahan demo',1500)});document.getElementById('export').addEventListener('click',()=>{let rows=[['Waktu','TPM aktual','Target','TPM','Servo','Konsistensi','Status'],['18:45:10','24','24','24 TPM','42°','Konsisten','Normal'],['18:44:10','23','24','23 TPM','42°','Konsisten','Normal'],['18:43:10','27','24','27 TPM','40°','Konsisten','Penyesuaian'],['18:42:10','25','24','25 TPM','41°','Konsisten','Normal'],['18:41:10','8','24','8 TPM','41°','Perlu verifikasi','Periksa']];let csv=rows.map(r=>r.map(v=>'"'+v.replaceAll('"','""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='monitis-riwayat-demo.csv';a.click();URL.revokeObjectURL(a.href)});
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 
+    <!-- App Logic & Chart.js -->
+    <script>
+        // State variables
+        let activeTargetTPM = 24; // Nilai target yang diterapkan ke sistem
+        let sliderValue = 24;     // Nilai input slider saat ini
+        let actualTPM = 12;       // Laju pembacaan sensor awal
+        let servoPos = 90;        // Sudut servo awal
+        
+        // Data History untuk Grafik (20 data point)
+        const maxDataPoints = 20;
+        const timeLabels = Array(maxDataPoints).fill('');
+        const actualData = Array(maxDataPoints).fill(actualTPM);
+        const targetData = Array(maxDataPoints).fill(activeTargetTPM);
 
-const activeDeviceSelect=document.getElementById("activeDeviceSelect");
-function updateDeviceSummaries(){
-  const rows=[...document.querySelectorAll("#deviceTable tbody tr")];
-  const online=rows.filter(r=>r.dataset.connection==="Online").length;
-  const attention=rows.filter(r=>r.dataset.status!=="Normal").length;
-  document.getElementById("deviceTotal").textContent=rows.length;
-  document.getElementById("deviceOnline").textContent=online;
-  document.getElementById("deviceAttention").textContent=attention;
-}
-function setActiveDevice(id){
-  const row=document.querySelector('#deviceTable tbody tr[data-id="'+id+'"]');
-  if(!row) return;
-  const name=row.dataset.name, target=row.dataset.target||"24";
-  if(activeDeviceSelect){
-    let opt=[...activeDeviceSelect.options].find(o=>o.value===id);
-    if(!opt){opt=document.createElement("option");opt.value=id;activeDeviceSelect.appendChild(opt);}
-    opt.textContent=name+" · "+id;activeDeviceSelect.value=id;
-  }
-  document.getElementById("activeDeviceLabel").textContent=id;
-  document.getElementById("activeDeviceName").textContent=name;
-  document.getElementById("activeDeviceTarget").textContent=target+" TPM";
-  document.getElementById("activeDeviceStat").textContent=id;
-  const side=document.querySelector(".side-bottom .device-row");
-  if(side) side.innerHTML='<span class="dot"></span> ESP32 — '+id;
-  document.getElementById("targetDisplay").textContent=target;
-  document.getElementById("targetText").textContent=target+" TPM";
-  document.getElementById("targetRange").value=target;
-  document.getElementById("targetInline").textContent=target;
-  activeTarget=Number(target);
-}
-if(activeDeviceSelect) activeDeviceSelect.addEventListener("change",()=>setActiveDevice(activeDeviceSelect.value));
-document.querySelectorAll(".choose-device").forEach(btn=>btn.addEventListener("click",()=>{setActiveDevice(btn.dataset.id);showPage("dashboard");}));
-const deviceSearch=document.getElementById("deviceSearch");
-if(deviceSearch) deviceSearch.addEventListener("input",()=>{const q=deviceSearch.value.toLowerCase();document.querySelectorAll("#deviceTable tbody tr").forEach(row=>row.style.display=row.innerText.toLowerCase().includes(q)?"":"none");});
-function bindEditButton(btn){
-  btn.addEventListener("click",()=>{
-    const row=btn.closest("tr");
-    const newName=prompt("Nama produk/proyek:",row.dataset.name);
-    if(newName===null) return;
-    const newLocation=prompt("Lokasi atau kelompok:",row.dataset.location||"");
-    if(newLocation===null) return;
-    const newTarget=prompt("Target TPM (8–60):",row.dataset.target||"24");
-    if(newTarget===null) return;
-    const t=Math.max(8,Math.min(60,Number(newTarget)||24));
-    row.dataset.name=newName.trim()||row.dataset.name;row.dataset.location=newLocation.trim()||"—";row.dataset.target=String(t);
-    row.children[0].textContent=row.dataset.name;row.children[2].textContent=row.dataset.location;row.children[4].textContent=t+" TPM";
-    const opt=[...activeDeviceSelect.options].find(o=>o.value===row.dataset.id);if(opt) opt.textContent=row.dataset.name+" · "+row.dataset.id;
-    if(activeDeviceSelect.value===row.dataset.id) setActiveDevice(row.dataset.id);
-  });
-}
-document.querySelectorAll(".edit-device").forEach(bindEditButton);
-document.getElementById("addDeviceBtn").addEventListener("click",()=>{
-  const name=prompt("Nama produk atau proyek MONITIS:");
-  if(!name||!name.trim()) return;
-  const location=prompt("Lokasi atau kelompok proyek:","MONITIS Project");
-  if(location===null) return;
-  const targetInput=prompt("Target TPM awal (8–60):","24");
-  if(targetInput===null) return;
-  const target=Math.max(8,Math.min(60,Number(targetInput)||24));
-  const existing=[...document.querySelectorAll("#deviceTable tbody tr")].map(r=>r.dataset.id);
-  let n=1,id;do{id="IS-"+String(existing.length+n).padStart(3,"0");n++;}while(existing.includes(id));
-  const row=document.createElement("tr");
-  row.dataset.id=id;row.dataset.name=name.trim();row.dataset.location=location.trim()||"—";row.dataset.target=String(target);row.dataset.connection="Belum terhubung";row.dataset.status="Belum dikonfigurasi";
-  row.innerHTML='<td></td><td></td><td></td><td><span class="tag warn">Belum terhubung</span></td><td></td><td><span class="tag warn">Belum dikonfigurasi</span></td><td><button class="btn choose-device">Pilih</button> <button class="btn edit-device">Edit</button></td>';
-  row.children[0].textContent=row.dataset.name;row.children[1].textContent=id;row.children[2].textContent=row.dataset.location;row.children[4].textContent=target+" TPM";
-  const choose=row.querySelector(".choose-device");choose.dataset.id=id;choose.addEventListener("click",()=>{setActiveDevice(id);showPage("dashboard");});
-  bindEditButton(row.querySelector(".edit-device"));
-  document.querySelector("#deviceTable tbody").appendChild(row);
-  const opt=document.createElement("option");opt.value=id;opt.textContent=name.trim()+" · "+id;activeDeviceSelect.appendChild(opt);
-  updateDeviceSummaries();setActiveDevice(id);
-});
-updateDeviceSummaries();
-</script></body></html>
+        // Inisialisasi Chart.js
+        const ctx = document.getElementById('monitoringChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeLabels,
+                datasets: [
+                    {
+                        label: 'Laju Aktual (TPM)',
+                        data: actualData,
+                        borderColor: '#3568D4',
+                        backgroundColor: 'rgba(53, 104, 212, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4, // Smooth curve
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#3568D4'
+                    },
+                    {
+                        label: 'Target (TPM)',
+                        data: targetData,
+                        borderColor: '#94a3b8', // slate-400
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 400 },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 70,
+                        grid: { color: '#f1f5f9' },
+                        title: { display: true, text: 'Tetes / Menit' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { display: false } // Sembunyikan label waktu agar rapi
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6 } },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                interaction: { mode: 'nearest', axis: 'x', intersect: false }
+            }
+        });
+
+        // Update Text Display based on slider drag
+        function updateSliderValue(val) {
+            sliderValue = parseInt(val);
+            document.getElementById('slider-val-display').innerText = sliderValue;
+        }
+
+        // Terapkan Target Button Logic
+        function terapkanTarget() {
+            activeTargetTPM = sliderValue;
+            
+            // Perbarui Card 1 dan Panel Status
+            document.getElementById('val-target').innerText = activeTargetTPM;
+            document.getElementById('status-target').innerText = activeTargetTPM + ' TPM';
+            
+            // Tampilkan Notifikasi Toast Text
+            const notif = document.getElementById('notif-target');
+            notif.classList.remove('opacity-0');
+            setTimeout(() => { notif.classList.add('opacity-0'); }, 3000);
+        }
+
+        // Fungsi Helper untuk membatasi nilai
+        const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+        // Core Control Loop (Simulasi) - Berjalan setiap 2 detik
+        setInterval(() => {
+            // 1. Simulasikan Perubahan Laju Aktual (mendekati target secara bertahap + noise)
+            const selisih = activeTargetTPM - actualTPM;
+            
+            if (Math.abs(selisih) > 1) {
+                // Bergerak mendekati target
+                actualTPM += selisih * 0.4; 
+            }
+            // Tambahkan sedikit noise acak (-1 hingga +1)
+            actualTPM += (Math.random() * 2) - 1; 
+            actualTPM = Math.round(clamp(actualTPM, 0, 70));
+            
+            // 2. Kalkulasi Selisih Aktual vs Target
+            const currentDiff = actualTPM - activeTargetTPM;
+
+            // 3. Simulasikan Respon Servo (Logika sederhana)
+            // Misalnya: jika terlalu cepat (diff positif), tutup katup (sudut mengecil). Jika lambat, buka katup (sudut membesar)
+            // Asumsi 0 derajat = tertutup rapat, 180 derajat = terbuka penuh
+            servoPos = 90 - (currentDiff * 3); // Pengali sekadar angka demo visual
+            servoPos = Math.round(clamp(servoPos, 0, 180));
+
+            // 4. Update UI Elements
+            document.getElementById('val-aktual').innerText = actualTPM;
+            document.getElementById('status-aktual').innerText = actualTPM + ' TPM';
+            
+            document.getElementById('val-selisih').innerText = Math.abs(currentDiff);
+            document.getElementById('status-selisih').innerText = (currentDiff > 0 ? '+' : '') + currentDiff + ' TPM';
+
+            document.getElementById('val-servo').innerText = servoPos;
+            document.getElementById('status-servo').innerText = servoPos + '°';
+
+            // 5. Update Status Badge & Visual Marker
+            const badge = document.getElementById('status-badge');
+            const marker = document.getElementById('visual-marker');
+            
+            if (Math.abs(currentDiff) <= 2) {
+                badge.innerText = 'Target Tercapai';
+                badge.className = 'px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700';
+                marker.style.left = '50%';
+                marker.className = 'absolute top-0 bottom-0 w-4 bg-emerald-500 rounded-full transition-all duration-500 ease-out';
+            } else {
+                badge.innerText = 'Menyesuaikan...';
+                badge.className = 'px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-700 animate-pulse';
+                
+                // Pindahkan posisi marker (0% = lambat sekali, 50% = pas, 100% = cepat sekali)
+                let persen = 50 + (currentDiff * 2.5); // * 2.5 agar lebih terlihat grafisnya
+                persen = clamp(persen, 0, 100);
+                marker.style.left = persen + '%';
+                marker.className = 'absolute top-0 bottom-0 w-4 bg-amber-500 rounded-full transition-all duration-500 ease-out';
+            }
+
+            // 6. Update Grafik Chart.js
+            const now = new Date();
+            const timeString = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+            
+            // Geser data lama
+            timeLabels.shift();
+            actualData.shift();
+            targetData.shift();
+            
+            // Masukkan data baru
+            timeLabels.push(timeString);
+            actualData.push(actualTPM);
+            targetData.push(activeTargetTPM);
+            
+            chart.update('none'); // Update tanpa animasi agar lebih ringan
+
+        }, 2000); // 2000 ms = 2 detik
+
+    </script>
+</body>
+</html>
