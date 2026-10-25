@@ -12,26 +12,39 @@
 <div class="bottom"><div class="card"><div class="card-head"><div><h3>Data terbaru</h3><p>Contoh telemetri simulasi</p></div><button class="btn" data-goto="history">Lihat semua →</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Waktu</th><th>TPM</th><th>TPM</th><th>Servo</th><th>Status</th></tr></thead><tbody><tr><td>18:45:10</td><td>24</td><td>24 TPM</td><td>42°</td><td><span class="pill">Normal</span></td></tr><tr><td>18:44:10</td><td>23</td><td>23 TPM</td><td>42°</td><td><span class="pill">Normal</span></td></tr><tr><td>18:43:10</td><td>27</td><td>27 TPM</td><td>40°</td><td><span class="pill warn">Penyesuaian</span></td></tr></tbody></table></div></div><div class="card"><div class="card-head"><div><h3>Aktivitas &amp; peringatan</h3><p>Informasi sistem terbaru</p></div><button class="btn" data-goto="alerts">Semua →</button></div><div class="alerts"><div class="alert"><div class="alertmark info">↻</div><div><b>Servo melakukan penyesuaian</b><p>Posisi berubah dari 40° ke 42° dalam mode simulasi.</p><time>18:43 · Informasi</time></div></div><div class="alert"><div class="alertmark">ⓘ</div><div><b>Verifikasi silang sensor</b><p>Pastikan nilai TPM dan tren TPM konsisten.</p><time>18:40 · Pengingat pengujian</time></div></div></div></div></div></section>
 
 <section class="page" id="page-devices">
-  <div class="heading"><div><div class="eyebrow">Workspace perangkat</div><h2>Manajemen Perangkat</h2><p>Kelola beberapa unit MONITIS, pilih perangkat aktif, dan lihat status setiap unit dari satu aplikasi.</p></div><div class="actions"><button class="btn primary" id="addDeviceBtn">＋ Tambah perangkat</button></div></div>
-  <div class="demo-banner"><span>ⓘ</span><div><b>Mode demonstrasi.</b> Daftar perangkat berikut adalah contoh UI. Penambahan perangkat belum tersimpan ke backend dan belum terhubung ke ESP32 nyata.</div></div>
+  <div class="heading"><div><div class="eyebrow">Workspace produk &amp; proyek</div><h2>Manajemen Perangkat</h2><p>Daftarkan beberapa produk/proyek MONITIS, simpan identitas masing-masing, lalu pilih unit yang ingin dipantau.</p></div><div class="actions"><button class="btn primary" id="addDeviceBtn">＋ Tambah produk / proyek</button></div></div>
+  <div class="demo-banner"><span>ⓘ</span><div><b>Manajemen demo lokal.</b> Data produk yang ditambahkan tersimpan sementara di browser selama halaman ini terbuka. Penyimpanan permanen dan koneksi ESP32 memerlukan backend/database.</div></div>
   <div class="stats">
-    <div class="card stat"><div class="stat-top">Total perangkat <span class="stat-icon">▣</span></div><div class="stat-value" id="deviceTotal">3</div><div class="stat-foot">Terdaftar di workspace demo</div></div>
-    <div class="card stat"><div class="stat-top">Online <span class="stat-icon">⌁</span></div><div class="stat-value" id="deviceOnline" style="color:var(--green)">2</div><div class="stat-foot">Terhubung pada simulasi</div></div>
-    <div class="card stat"><div class="stat-top">Perlu diperiksa <span class="stat-icon">ⓘ</span></div><div class="stat-value" id="deviceAttention" style="color:var(--amber)">1</div><div class="stat-foot">Memiliki status perhatian demo</div></div>
-    <div class="card stat"><div class="stat-top">Workspace <span class="stat-icon">⌂</span></div><div class="stat-value" style="font-size:23px">MONITIS Lab</div><div class="stat-foot">Contoh kelompok perangkat</div></div>
+    <div class="card stat"><div class="stat-top">Total produk/proyek <span class="stat-icon">▣</span></div><div class="stat-value" id="deviceTotal">3</div><div class="stat-foot">Item dalam daftar</div></div>
+    <div class="card stat"><div class="stat-top">Online <span class="stat-icon">⌁</span></div><div class="stat-value" id="deviceOnline" style="color:var(--green)">2</div><div class="stat-foot">Status contoh/simulasi</div></div>
+    <div class="card stat"><div class="stat-top">Perlu diperiksa <span class="stat-icon">ⓘ</span></div><div class="stat-value" id="deviceAttention" style="color:var(--amber)">1</div><div class="stat-foot">Status contoh/simulasi</div></div>
+    <div class="card stat"><div class="stat-top">Produk aktif <span class="stat-icon">⌂</span></div><div class="stat-value" id="activeDeviceStat" style="font-size:23px">IS-001</div><div class="stat-foot">Pilihan saat ini</div></div>
   </div>
   <div class="card">
-    <div class="card-head"><div><h3>Daftar perangkat</h3><p>Pilih perangkat untuk membuka dashboard dan kontrol unit tersebut</p></div><input class="field" id="deviceSearch" placeholder="Cari nama / ID..." style="max-width:190px"></div>
-    <div class="table-wrap"><table class="table" id="deviceTable"><thead><tr><th>Nama perangkat</th><th>ID perangkat</th><th>Workspace</th><th>Status koneksi</th><th>TPM demo</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
-      <tr data-id="IS-001" data-name="MONITIS Lab 01"><td>MONITIS Lab 01</td><td>IS-001</td><td>MONITIS Lab</td><td><span class="tag">Online</span></td><td>24 TPM</td><td><span class="tag">Normal</span></td><td><button class="btn choose-device" data-id="IS-001">Pilih</button></td></tr>
-      <tr data-id="IS-002" data-name="MONITIS Lab 02"><td>MONITIS Lab 02</td><td>IS-002</td><td>MONITIS Lab</td><td><span class="tag">Online</span></td><td>31 TPM</td><td><span class="tag warn">Periksa</span></td><td><button class="btn choose-device" data-id="IS-002">Pilih</button></td></tr>
-      <tr data-id="IS-003" data-name="MONITIS Demo 03"><td>MONITIS Demo 03</td><td>IS-003</td><td>MONITIS Demo</td><td><span class="tag warn">Offline</span></td><td>—</td><td><span class="tag warn">Tidak ada data</span></td><td><button class="btn choose-device" data-id="IS-003">Pilih</button></td></tr>
+    <div class="card-head"><div><h3>Daftar produk / proyek</h3><p>Setiap entri mewakili satu unit/proyek monitoring yang dikelola secara terpisah</p></div><input class="field" id="deviceSearch" placeholder="Cari nama, ID, atau lokasi..." style="max-width:220px"></div>
+    <div class="table-wrap"><table class="table" id="deviceTable"><thead><tr><th>Nama produk / proyek</th><th>ID unik</th><th>Lokasi / kelompok</th><th>Status koneksi</th><th>Target TPM</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
+      <tr data-id="IS-001" data-name="MONITIS Lab 01" data-location="MONITIS Lab" data-target="24" data-connection="Online" data-status="Normal"><td>MONITIS Lab 01</td><td>IS-001</td><td>MONITIS Lab</td><td><span class="tag">Online</span></td><td>24 TPM</td><td><span class="tag">Normal</span></td><td><button class="btn choose-device" data-id="IS-001">Pilih</button> <button class="btn edit-device" data-id="IS-001">Edit</button></td></tr>
+      <tr data-id="IS-002" data-name="MONITIS Lab 02" data-location="MONITIS Lab" data-target="30" data-connection="Online" data-status="Periksa"><td>MONITIS Lab 02</td><td>IS-002</td><td>MONITIS Lab</td><td><span class="tag">Online</span></td><td>30 TPM</td><td><span class="tag warn">Periksa</span></td><td><button class="btn choose-device" data-id="IS-002">Pilih</button> <button class="btn edit-device" data-id="IS-002">Edit</button></td></tr>
+      <tr data-id="IS-003" data-name="MONITIS Demo 03" data-location="MONITIS Demo" data-target="24" data-connection="Offline" data-status="Tidak ada data"><td>MONITIS Demo 03</td><td>IS-003</td><td>MONITIS Demo</td><td><span class="tag warn">Offline</span></td><td>24 TPM</td><td><span class="tag warn">Tidak ada data</span></td><td><button class="btn choose-device" data-id="IS-003">Pilih</button> <button class="btn edit-device" data-id="IS-003">Edit</button></td></tr>
     </tbody></table></div>
   </div>
-  <div class="card section-card" style="margin-top:18px"><h3>Konsep pengelolaan multi-perangkat</h3><p>Untuk implementasi backend nanti, setiap perangkat sebaiknya memiliki ID unik, nama, workspace/lokasi, status koneksi, konfigurasi target TPM, telemetri, serta riwayat peringatan tersendiri.</p><div class="form-row"><div><label>Perangkat aktif</label><small>Dashboard akan mengikuti pilihan ini pada prototipe UI</small></div><strong id="activeDeviceLabel">IS-001</strong></div><div class="form-row"><div><label>Isolasi data</label><small>Data antar perangkat perlu dipisahkan berdasarkan device_id di backend</small></div><span class="tag blue">Rencana</span></div></div>
+  <div class="card section-card" style="margin-top:18px"><h3>Produk / proyek terpilih</h3><p>Identitas unit yang sedang aktif pada aplikasi demo.</p><div class="form-row"><div><label>Nama produk / proyek</label><small>Item yang sedang dipilih</small></div><strong id="activeDeviceName">MONITIS Lab 01</strong></div><div class="form-row"><div><label>ID unik perangkat</label><small>Gunakan ID berbeda untuk setiap ESP32</small></div><strong id="activeDeviceLabel">IS-001</strong></div><div class="form-row"><div><label>Target TPM tersimpan</label><small>Target demo khusus perangkat terpilih</small></div><strong id="activeDeviceTarget">24 TPM</strong></div></div>
 </section>
 
-<section class="page" id="page-monitoring"><div class="heading"><div><div class="eyebrow">Kontrol prototipe</div><h2>Monitoring &amp; Kontrol</h2><p>Atur target TPM dan lihat posisi servo dalam simulasi antarmuka.</p></div><span class="pill">● Demo aktif</span></div><div class="banner">ⓘ Slider berikut hanya simulasi UI dan tidak mengendalikan perangkat fisik. Jangan gunakan untuk mengontrol infus pasien.</div><div class="twocol"><div class="card sectioncard"><h3>Target laju tetesan</h3><p>Setpoint TPM untuk algoritma kontrol prototipe.</p><div class="control"><h4>Target TPM</h4><div class="big"><span id="targetVal">24</span> <small>tetes/menit</small></div><input class="range" id="targetRange" type="range" min="8" max="60" value="24"><div class="rangeends"><span>8 TPM</span><span>60 TPM</span></div><div class="row"><div><label>Target saat ini</label><small>Nilai demo lokal</small></div><b id="targetText">24 TPM</b></div><button class="btn primary" id="apply" style="width:100%;margin-top:15px">Terapkan target (demo)</button><p id="applyMsg" style="display:none;color:var(--green);margin-top:10px">Target demo diperbarui.</p></div></div><div class="card sectioncard"><h3>Status aktuator servo</h3><p>Posisi ilustratif servo penggerak mekanisme pengatur tetesan.</p><div class="control"><h4>Posisi servo</h4><div class="big"><span id="servoVal">42</span><small> °</small></div><input class="range" id="servoRange" type="range" min="0" max="90" value="42"><div class="rangeends"><span>0°</span><span>90°</span></div><div class="row"><div><label>Mode kontrol</label><small>Belum terhubung ke firmware</small></div><select class="field"><option>Otomatis (demo)</option><option>Manual (demo)</option></select></div><div class="row"><div><label>Aktuator</label><small>Servo pengatur tetesan</small></div><span class="pill">Siap (demo)</span></div></div></div><div class="card sectioncard"><h3>Telemetri sensor</h3><p>Nilai contoh untuk rancangan pemantauan.</p><div class="row"><div><label>Sensor optik</label><small>Laju tetesan</small></div><b>24 TPM</b></div><div class="row"><div><label>Sensor optik</label><small>TPM simulasi</small></div><b>24 TPM</b></div><div class="row"><div><label>Konsistensi sensor</label><small>Evaluasi demo</small></div><span class="pill">Konsisten</span></div></div><div class="card sectioncard"><h3>Logika kontrol</h3><p>Konsep yang perlu diterapkan dan diuji pada firmware.</p><div class="alert"><div class="alertmark info">1</div><div><b>Baca TPM aktual</b><p>Hitung tetesan dari sensor optik dalam jendela waktu.</p></div></div><div class="alert"><div class="alertmark info">2</div><div><b>Bandingkan dengan target</b><p>Hitung selisih nilai aktual dan setpoint.</p></div></div><div class="alert"><div class="alertmark">3</div><div><b>Sesuaikan servo bertahap</b><p>Gunakan batas gerak dan jeda stabilisasi yang dikalibrasi.</p></div></div></div></div></section>
+<section class="page" id="page-monitoring">
+  <div class="heading"><div><div class="eyebrow">Kontrol laju tetesan</div><h2>Monitoring &amp; Kontrol</h2><p>Atur target laju tetesan. MONITIS menggunakan servo sebagai aktuator untuk menyesuaikan mekanisme tetesan secara otomatis.</p></div><span class="status-pill"><span class="dot"></span> Demo aktif</span></div>
+  <div class="demo-banner"><span>ⓘ</span><div><b>Mode demonstrasi.</b> Pengaturan target di halaman ini hanya simulasi UI. Servo fisik belum terhubung, dan target TPM harus dikalibrasi serta diuji menggunakan cairan simulasi.</div></div>
+  <div class="monitor-grid">
+    <div class="card section-card"><h3>Kontrol laju tetesan</h3><p>Target TPM adalah satu-satunya parameter kontrol yang dapat diubah operator. Posisi servo merupakan keluaran aktuator yang ditentukan oleh sistem, bukan kontrol manual terpisah.</p>
+      <div class="control-box"><div style="display:flex;justify-content:space-between;align-items:center"><h4>Target laju tetesan</h4><span class="tag blue">Setpoint</span></div><div class="big-number"><span id="targetDisplay">24</span> <small>tetes/menit (TPM)</small></div><input class="range" id="targetRange" type="range" min="8" max="60" value="24"><div class="range-labels"><span>8 TPM</span><span>60 TPM</span></div><div class="form-row"><div><label>Target yang dipilih</label><small>Nilai referensi kontrol</small></div><strong id="targetText">24 TPM</strong></div><button class="btn primary" id="applyTarget" style="width:100%;margin-top:16px">Terapkan target (demo)</button><div id="targetMessage" style="font-size:11px;color:var(--green);margin-top:10px;display:none">Target TPM demo diperbarui. Sistem akan menyesuaikan servo pada implementasi sebenarnya.</div></div>
+    </div>
+    <div class="card section-card"><h3>Status kontrol otomatis</h3><p>Servo bergerak sebagai respons sistem untuk mendekati target TPM. Operator tidak mengatur sudut servo secara langsung dari halaman ini.</p>
+      <div class="control-box"><div style="display:flex;justify-content:space-between;align-items:center"><h4>Status aktuator servo</h4><span class="tag warn">Simulasi</span></div><div class="big-number"><span id="servoDisplay">42</span><small>° · posisi simulasi</small></div><div class="form-row"><div><label>Mode kontrol</label><small>Servo mengikuti target laju tetesan</small></div><strong style="color:var(--green)">Otomatis</strong></div><div class="form-row"><div><label>TPM aktual</label><small>Data sensor optik simulasi</small></div><strong id="actualTpmDisplay">24 TPM</strong></div><div class="form-row"><div><label>Status target</label><small>Perbandingan aktual dengan target</small></div><span class="tag" id="targetStatus">Sesuai</span></div><p style="margin:14px 0 0">Catatan: hubungan sudut servo terhadap TPM perlu dikalibrasi secara empiris. Angka posisi servo hanya ilustrasi.</p></div>
+    </div>
+  </div>
+  <div class="card section-card"><h3>Data sensor untuk umpan balik</h3><p>Sensor optik menghitung tetesan aktual. Sistem membandingkan hasil pengukuran dengan target untuk menentukan apakah servo perlu disesuaikan.</p><div class="form-row"><div><label>Sensor optik</label><small>Input pengukuran TPM</small></div><span class="tag">Aktif (demo)</span></div><div class="form-row"><div><label>Algoritma kontrol</label><small>Bandingkan TPM aktual dan target, lalu sesuaikan servo secara bertahap</small></div><span class="tag blue">Konsep</span></div></div>
+</section>
+
 <section class="page" id="page-history"><div class="heading"><div><div class="eyebrow">Catatan pengukuran</div><h2>Riwayat Data</h2><p>Contoh telemetri untuk ekspor dan analisis pengujian.</p></div><button class="btn" id="export">↓ Ekspor CSV demo</button></div><div class="banner">Semua baris di bawah adalah <b>data contoh</b>, bukan data dari ESP32 atau database.</div><div class="card"><div class="card-head"><div><h3>Riwayat telemetri</h3><p>TPM, TPM, posisi servo, dan status</p></div><select class="select" id="filter"><option value="all">Semua status</option><option>Normal</option><option>Penyesuaian</option><option>Periksa</option></select></div><div class="tablewrap"><table class="table" id="history"><thead><tr><th>Waktu</th><th>TPM aktual</th><th>Target</th><th>Posisi servo</th><th>Status</th><th>Konsistensi</th><th>Status</th></tr></thead><tbody><tr data-status="Normal"><td>18:45:10</td><td>24</td><td>24</td><td>24 TPM</td><td>42°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr><tr data-status="Normal"><td>18:44:10</td><td>23</td><td>24</td><td>23 TPM</td><td>42°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr><tr data-status="Penyesuaian"><td>18:43:10</td><td>27</td><td>24</td><td>27 TPM</td><td>40°</td><td>Konsisten</td><td><span class="pill warn">Penyesuaian</span></td></tr><tr data-status="Normal"><td>18:42:10</td><td>25</td><td>24</td><td>25 TPM</td><td>41°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr><tr data-status="Periksa"><td>18:41:10</td><td>8</td><td>24</td><td>8 TPM</td><td>41°</td><td>Perlu verifikasi</td><td><span class="pill warn">Periksa</span></td></tr><tr data-status="Normal"><td>18:40:10</td><td>24</td><td>24</td><td>24 TPM</td><td>42°</td><td>Konsisten</td><td><span class="pill">Normal</span></td></tr></tbody></table></div></div></section>
 <section class="page" id="page-alerts"><div class="heading"><div><div class="eyebrow">Pusat informasi</div><h2>Peringatan &amp; Aktivitas</h2><p>Contoh notifikasi untuk rancangan dashboard.</p></div><button class="btn" id="read">Tandai dibaca</button></div><div class="banner">Peringatan demo bukan diagnosis dan tidak menggantikan pemantauan tenaga kesehatan.</div><div class="card"><div class="card-head"><div><h3>Aktivitas terbaru</h3><p>Informasi yang perlu ditinjau operator</p></div></div><div class="alerts" id="alertsList"><div class="alert"><div class="alertmark">!</div><div><b>TPM berbeda dari target</b><p>Contoh: TPM aktual di luar toleransi. Tinjau data sensor dan mekanisme servo dalam pengujian simulasi.</p><time>18:41 · Perlu pemeriksaan</time></div></div><div class="alert"><div class="alertmark info">↻</div><div><b>Servo menyesuaikan posisi</b><p>Perubahan posisi servo tercatat pada log simulasi.</p><time>18:43 · Informasi</time></div></div><div class="alert"><div class="alertmark info">⌁</div><div><b>Sensor optik menerima pembacaan</b><p>Data tetesan contoh diterima dan diproses.</p><time>18:44 · Informasi</time></div></div><div class="alert"><div class="alertmark info">✓</div><div><b>Perangkat tersambung</b><p>Status koneksi simulasi: online.</p><time>18:45 · Sistem</time></div></div></div></div></section>
 <section class="page" id="page-settings"><div class="heading"><div><div class="eyebrow">Konfigurasi aplikasi</div><h2>Pengaturan</h2><p>Contoh identitas perangkat dan preferensi notifikasi.</p></div><button class="btn primary" id="save">Simpan perubahan demo</button></div><div class="banner">Pengaturan hanya mengubah tampilan lokal; belum tersambung ke backend atau ESP32.</div><div class="card sectioncard"><h3>Informasi perangkat</h3><p>Identitas dan koneksi prototipe.</p><div class="row"><div><label>Nama perangkat</label><small>Nama yang tampil di dashboard</small></div><input class="field" value="MONITIS IS-001"></div><div class="row"><div><label>Perangkat kontrol</label><small>Mikrokontroler utama</small></div><input class="field" value="ESP32 DevKit" readonly></div><div class="row"><div><label>Status Wi-Fi</label><small>Status simulasi</small></div><span class="pill">Terhubung</span></div><div class="row"><div><label>Interval telemetri</label><small>Jarak antar sampel</small></div><select class="field"><option>1 detik</option><option>2 detik</option><option>5 detik</option><option>10 detik</option></select></div></div><div class="card sectioncard"><h3>Preferensi notifikasi</h3><p>Atur notifikasi visual pada dashboard demo.</p><div class="row"><div><label>Ketidaksesuaian TPM</label><small>Tampilkan peringatan saat TPM berbeda dari target</small></div><input type="checkbox" class="switch" checked></div><div class="row"><div><label>Ketidakkonsistenan sensor</label><small>Tandai data yang perlu diperiksa</small></div><input type="checkbox" class="switch" checked></div><div class="row"><div><label>Status koneksi</label><small>Tampilkan status online/offline</small></div><input type="checkbox" class="switch" checked></div></div></section><div class="foot">MONITIS UI Concept · Prototype only · Data simulasi · Belum untuk penggunaan klinis</div>
@@ -39,36 +52,77 @@
 <script>
 const names={dashboard:'Dashboard',monitoring:'Monitoring & Kontrol',history:'Riwayat Data',alerts:'Peringatan',settings:'Pengaturan'};function show(name){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));document.getElementById('crumb').textContent=names[name]||'Dashboard';window.scrollTo({top:0,behavior:'smooth'})}document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));let tr=document.getElementById('targetRange');tr.addEventListener('input',()=>{document.getElementById('targetVal').textContent=tr.value;document.getElementById('targetText').textContent=tr.value+' TPM'});document.getElementById('apply').addEventListener('click',()=>{document.getElementById('targetInline').textContent=tr.value;document.getElementById('applyMsg').style.display='block'});document.getElementById('servoRange').addEventListener('input',e=>document.getElementById('servoVal').textContent=e.target.value);document.getElementById('refresh').addEventListener('click',e=>{e.target.textContent='✓ Tampilan diperbarui';setTimeout(()=>e.target.textContent='↻ Perbarui tampilan',1300)});document.getElementById('filter').addEventListener('change',e=>document.querySelectorAll('#history tbody tr').forEach(r=>r.style.display=e.target.value==='all'||r.dataset.status===e.target.value?'':'none'));document.getElementById('read').addEventListener('click',e=>{document.querySelectorAll('#alertsList .alertmark').forEach(x=>x.style.opacity='.45');e.target.textContent='✓ Sudah ditandai'});document.getElementById('save').addEventListener('click',e=>{e.target.textContent='✓ Tersimpan (demo)';setTimeout(()=>e.target.textContent='Simpan perubahan demo',1500)});document.getElementById('export').addEventListener('click',()=>{let rows=[['Waktu','TPM aktual','Target','TPM','Servo','Konsistensi','Status'],['18:45:10','24','24','24 TPM','42°','Konsisten','Normal'],['18:44:10','23','24','23 TPM','42°','Konsisten','Normal'],['18:43:10','27','24','27 TPM','40°','Konsisten','Penyesuaian'],['18:42:10','25','24','25 TPM','41°','Konsisten','Normal'],['18:41:10','8','24','8 TPM','41°','Perlu verifikasi','Periksa']];let csv=rows.map(r=>r.map(v=>'"'+v.replaceAll('"','""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='monitis-riwayat-demo.csv';a.click();URL.revokeObjectURL(a.href)});
 
+
 const activeDeviceSelect=document.getElementById("activeDeviceSelect");
-function setActiveDevice(id, name){
+function updateDeviceSummaries(){
+  const rows=[...document.querySelectorAll("#deviceTable tbody tr")];
+  const online=rows.filter(r=>r.dataset.connection==="Online").length;
+  const attention=rows.filter(r=>r.dataset.status!=="Normal").length;
+  document.getElementById("deviceTotal").textContent=rows.length;
+  document.getElementById("deviceOnline").textContent=online;
+  document.getElementById("deviceAttention").textContent=attention;
+}
+function setActiveDevice(id){
+  const row=document.querySelector('#deviceTable tbody tr[data-id="'+id+'"]');
+  if(!row) return;
+  const name=row.dataset.name, target=row.dataset.target||"24";
   if(activeDeviceSelect){
     let opt=[...activeDeviceSelect.options].find(o=>o.value===id);
-    if(!opt){opt=document.createElement("option");opt.value=id;opt.textContent=name+" · "+id;activeDeviceSelect.appendChild(opt);}
-    activeDeviceSelect.value=id;
+    if(!opt){opt=document.createElement("option");opt.value=id;activeDeviceSelect.appendChild(opt);}
+    opt.textContent=name+" · "+id;activeDeviceSelect.value=id;
   }
-  const label=document.getElementById("activeDeviceLabel");
-  if(label) label.textContent=id;
+  document.getElementById("activeDeviceLabel").textContent=id;
+  document.getElementById("activeDeviceName").textContent=name;
+  document.getElementById("activeDeviceTarget").textContent=target+" TPM";
+  document.getElementById("activeDeviceStat").textContent=id;
   const side=document.querySelector(".side-bottom .device-row");
   if(side) side.innerHTML='<span class="dot"></span> ESP32 — '+id;
+  document.getElementById("targetDisplay").textContent=target;
+  document.getElementById("targetText").textContent=target+" TPM";
+  document.getElementById("targetRange").value=target;
+  document.getElementById("targetInline").textContent=target;
+  activeTarget=Number(target);
 }
-if(activeDeviceSelect) activeDeviceSelect.addEventListener("change",()=>setActiveDevice(activeDeviceSelect.value,activeDeviceSelect.options[activeDeviceSelect.selectedIndex].text));
-document.querySelectorAll(".choose-device").forEach(btn=>btn.addEventListener("click",()=>{setActiveDevice(btn.dataset.id,btn.closest("tr").dataset.name);showPage("dashboard");}));
+if(activeDeviceSelect) activeDeviceSelect.addEventListener("change",()=>setActiveDevice(activeDeviceSelect.value));
+document.querySelectorAll(".choose-device").forEach(btn=>btn.addEventListener("click",()=>{setActiveDevice(btn.dataset.id);showPage("dashboard");}));
 const deviceSearch=document.getElementById("deviceSearch");
 if(deviceSearch) deviceSearch.addEventListener("input",()=>{const q=deviceSearch.value.toLowerCase();document.querySelectorAll("#deviceTable tbody tr").forEach(row=>row.style.display=row.innerText.toLowerCase().includes(q)?"":"none");});
-const addDeviceBtn=document.getElementById("addDeviceBtn");
-if(addDeviceBtn) addDeviceBtn.addEventListener("click",()=>{
-  const name=prompt("Masukkan nama perangkat baru:");
-  if(!name || !name.trim()) return;
+function bindEditButton(btn){
+  btn.addEventListener("click",()=>{
+    const row=btn.closest("tr");
+    const newName=prompt("Nama produk/proyek:",row.dataset.name);
+    if(newName===null) return;
+    const newLocation=prompt("Lokasi atau kelompok:",row.dataset.location||"");
+    if(newLocation===null) return;
+    const newTarget=prompt("Target TPM (8–60):",row.dataset.target||"24");
+    if(newTarget===null) return;
+    const t=Math.max(8,Math.min(60,Number(newTarget)||24));
+    row.dataset.name=newName.trim()||row.dataset.name;row.dataset.location=newLocation.trim()||"—";row.dataset.target=String(t);
+    row.children[0].textContent=row.dataset.name;row.children[2].textContent=row.dataset.location;row.children[4].textContent=t+" TPM";
+    const opt=[...activeDeviceSelect.options].find(o=>o.value===row.dataset.id);if(opt) opt.textContent=row.dataset.name+" · "+row.dataset.id;
+    if(activeDeviceSelect.value===row.dataset.id) setActiveDevice(row.dataset.id);
+  });
+}
+document.querySelectorAll(".edit-device").forEach(bindEditButton);
+document.getElementById("addDeviceBtn").addEventListener("click",()=>{
+  const name=prompt("Nama produk atau proyek MONITIS:");
+  if(!name||!name.trim()) return;
+  const location=prompt("Lokasi atau kelompok proyek:","MONITIS Project");
+  if(location===null) return;
+  const targetInput=prompt("Target TPM awal (8–60):","24");
+  if(targetInput===null) return;
+  const target=Math.max(8,Math.min(60,Number(targetInput)||24));
   const existing=[...document.querySelectorAll("#deviceTable tbody tr")].map(r=>r.dataset.id);
-  let n=1; let id;
-  do{id="IS-"+String(existing.length+n).padStart(3,"0");n++;}while(existing.includes(id));
-  const row=document.createElement("tr");row.dataset.id=id;row.dataset.name=name.trim();
-  row.innerHTML='<td></td><td></td><td>Workspace baru</td><td><span class="tag warn">Belum terhubung</span></td><td>—</td><td><span class="tag warn">Belum dikonfigurasi</span></td><td><button class="btn choose-device">Pilih</button></td>';
-  row.children[0].textContent=name.trim();row.children[1].textContent=id;
-  const btn=row.querySelector(".choose-device");btn.dataset.id=id;btn.addEventListener("click",()=>{setActiveDevice(id,name.trim());showPage("dashboard");});
+  let n=1,id;do{id="IS-"+String(existing.length+n).padStart(3,"0");n++;}while(existing.includes(id));
+  const row=document.createElement("tr");
+  row.dataset.id=id;row.dataset.name=name.trim();row.dataset.location=location.trim()||"—";row.dataset.target=String(target);row.dataset.connection="Belum terhubung";row.dataset.status="Belum dikonfigurasi";
+  row.innerHTML='<td></td><td></td><td></td><td><span class="tag warn">Belum terhubung</span></td><td></td><td><span class="tag warn">Belum dikonfigurasi</span></td><td><button class="btn choose-device">Pilih</button> <button class="btn edit-device">Edit</button></td>';
+  row.children[0].textContent=row.dataset.name;row.children[1].textContent=id;row.children[2].textContent=row.dataset.location;row.children[4].textContent=target+" TPM";
+  const choose=row.querySelector(".choose-device");choose.dataset.id=id;choose.addEventListener("click",()=>{setActiveDevice(id);showPage("dashboard");});
+  bindEditButton(row.querySelector(".edit-device"));
   document.querySelector("#deviceTable tbody").appendChild(row);
   const opt=document.createElement("option");opt.value=id;opt.textContent=name.trim()+" · "+id;activeDeviceSelect.appendChild(opt);
-  document.getElementById("deviceTotal").textContent=document.querySelectorAll("#deviceTable tbody tr").length;
+  updateDeviceSummaries();setActiveDevice(id);
 });
-
+updateDeviceSummaries();
 </script></body></html>
